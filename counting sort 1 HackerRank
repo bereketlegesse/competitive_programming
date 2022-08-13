@@ -1,0 +1,36 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts INTEGER_ARRAY arr as parameter.
+
+
+def countingSort(arr):
+    freq = [0 for _ in range(100)]  # intialize the the frequency array
+    min_num = 0
+    max_num = 99
+    range_of_num = 100
+    for i in range(len(arr)):
+        freq[arr[i]] += 1 
+    return freq
+ 
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = countingSort(arr)
+
+    fptr.write(' '.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
