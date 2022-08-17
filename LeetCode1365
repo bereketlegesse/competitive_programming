@@ -1,0 +1,11 @@
+class Solution(object):
+    def smallerNumbersThanCurrent(self, nums):
+        result = []       #intitialize array for result
+        for i in range(len(nums)):
+            x = nums[i]
+            no = 0
+            for j in range(len(nums)):
+                if x > nums[j]:
+                    no +=1    #increment to count numbers less than the current number
+            result.append(no)
+        return result
