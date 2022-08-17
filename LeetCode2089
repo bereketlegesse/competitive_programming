@@ -1,0 +1,21 @@
+class Solution(object):
+    def targetIndices(self, nums, target):
+    #sort array using selection sort
+        for i in range(len(nums)):
+            min_index = i
+            for j in range(i+1,len(nums)):
+                if nums[min_index] > nums[j]:
+                    min_index = j
+            if min_index != i:
+                nums[min_index],nums[i] = nums[i],nums[min_index]
+        count = 0
+        for i in range(len(nums)):
+            if target == nums[i]:
+                count += 1  # return the frequency of target
+        starting_index = 0
+        for i in range(len(nums)):
+            if target == nums[i]:
+                starting_index = i
+                break
+    
+        return [i for i in range(starting_index ,starting_index +count)]
