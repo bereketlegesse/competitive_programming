@@ -1,0 +1,7 @@
+import math
+def number_of_squares(n,m,a):
+    # n and m are the length and width of the rectangle
+    # a is side length of the square
+    area = n*m
+    squares = math.ceil(area/(a**2)) + 1 #number of squares needed
+    return squares
