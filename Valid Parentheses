@@ -1,0 +1,17 @@
+class Solution(object):
+    def isValid(self, s):
+        lst = []                                  # intialize new list
+        map_signs = {')':'(',']':'[','}':'{'}     # new dictionary to map opening and closing brackets 
+        for i in s:
+            if (i == "(" or i == "{"or i == "["):
+                lst.append(i)
+            else:
+                if len(lst) == 0 or map_signs[i] != lst[-1]:
+                    return "false"
+                elif map_signs[i] == lst[-1]:
+                    lst.pop()
+        if len(lst) == 0:
+            return 'true'
+        else:
+            return 'false'
+        
