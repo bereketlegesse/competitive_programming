@@ -1,0 +1,18 @@
+class Solution(object):
+    def findOriginalArray(self, changed):
+        result = []
+        if len(changed)%2 == 1:
+            return []
+        def check(changed):
+            for i in changed:
+                if not(i*2 in changed) and not(i/2 in changed):
+                    return False
+            return True    
+        if check(changed) == True:
+            for i in changed:
+                if i*2 in changed:
+                    result.append(i)
+                    changed.remove(i*2)
+            return result
+        else:
+            return []
