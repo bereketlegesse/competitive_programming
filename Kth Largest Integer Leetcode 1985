@@ -1,0 +1,6 @@
+class Solution(object):
+    def kthLargestNumber(self, nums, k):
+        int_nums = [int(i) for i in nums]  #cast elements of nums in t integers
+        # sort int_nums
+        int_nums.sort()
+        return str(int_nums[len(int_nums)-k])
