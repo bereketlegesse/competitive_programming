@@ -1,0 +1,14 @@
+class Solution(object):
+    def rearrangeArray(self, nums):
+        nums.sort()
+        mid = len(nums)//2
+        nums1 = nums[:mid]
+        nums2 = nums[mid:]
+        new_nums = []
+        for i in range(mid+1):
+            if nums1:
+                new_nums.append(nums1.pop())
+            if nums2:
+                new_nums.append(nums2.pop())
+
+        return new_nums
