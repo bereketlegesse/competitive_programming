@@ -1,0 +1,14 @@
+class Solution(object):
+    def maxFrequency(self, nums, k):
+        nums.sort()
+        p1 ,p2 = 0,0          #two pointers
+        count = 0
+        _sum = 0               #sum of elements between two pointers
+        while p2 < len(nums):
+            _sum += nums[p2]
+            while nums[p2] * (p2-p1+1) > _sum+k:
+                _sum -= nums[p1]
+                p1 += 1
+            count = max(count,p2-p1+1)
+            p2+=1
+        return count
