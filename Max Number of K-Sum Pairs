@@ -1,0 +1,10 @@
+class Solution(object):
+    def maxOperations(self, nums, k):
+        count = collections.Counter(nums)
+        operation = 0                             #initialize number of operation done on the array
+        for key in count.keys():
+            if key < k- key:
+                operation += min(count[key],count[k- key])
+            elif key == k - key:
+                operation += count[key]//2
+        return operation
