@@ -1,0 +1,12 @@
+class Solution(object):
+    def checkArithmeticSubarrays(self, nums, l, r):
+        def check(nums):
+            new_nums = frozenset(nums)
+            if len(new_nums) != len(new_nums):
+                return len(new_nums) == 1
+            _max  = max(nums)
+            _min =  min(nums)
+            step = (_max - _min) // (len(nums) - 1)
+            return all((i in nums for i in range(_min, _max, step)))
+        return [check(nums[i:j + 1]) for i, j in zip(l, r)]
+        
