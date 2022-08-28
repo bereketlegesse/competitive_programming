@@ -1,0 +1,13 @@
+class Solution(object):
+    def maxCoins(self, piles):
+        piles=sorted(piles,reverse=True)
+    
+        p1= 0         #p1, p2 two pointers
+        p2=len(piles)-1
+        result = 0
+        while p1 < p2:
+            result += piles[p1+1]
+            p1+=2
+            p2-=1
+        return result
+        
