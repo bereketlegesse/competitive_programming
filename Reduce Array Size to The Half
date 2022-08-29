@@ -1,0 +1,9 @@
+class Solution(object):
+    def minSetSize(self, arr):
+        count = collections.Counter(arr)
+        lst = sorted(count.values(),key = lambda x: -x)
+        _len = len(arr)
+        for i , x in enumerate(lst):
+            _len -= x
+            if _len*2 <= len(arr):
+                return i+1
