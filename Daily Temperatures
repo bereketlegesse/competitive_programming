@@ -1,0 +1,11 @@
+class Solution(object):
+    def dailyTemperatures(self, temperatures):
+        result = [0]*len(temperatures)
+        stk = []
+        for i,j in enumerate(temperatures):
+            while len(stk) and stk[-1][1] < j:
+                result[stk[-1][0]] = i -stk[-1][0]
+                stk.pop()
+            stk.append([i,j])
+        return result
+                    
