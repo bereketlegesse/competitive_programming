@@ -1,0 +1,23 @@
+from collections import deque , Counter
+import heapq
+
+class Solution(object):
+    def leastInterval(self, tasks, n):
+        queue = deque()
+        time = 0
+        freq = [-c for c in Counter(tasks).values()]
+        heapq.heapify(freq)
+        while freq or queue:
+            time += 1
+            if freq:
+                x = heapq.heappop(freq)+1
+                if x < 0:
+                    queue.append([x , time + n])
+            if queue and queue[0][1] == time:
+                x,j = queue.popleft()
+                heapq.heappush(freq,x)
+        return time
+        
+        
+        
+        #O(n) time complexity
