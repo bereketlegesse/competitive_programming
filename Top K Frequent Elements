@@ -1,0 +1,9 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        freq = list(Counter(nums).items())
+        freq.sort(key = lambda x : x[1])
+        result = []
+        for i in range(k):
+            k, j = freq.pop()
+            result.append(k)
+        return result
