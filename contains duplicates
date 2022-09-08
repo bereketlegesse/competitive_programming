@@ -1,0 +1,17 @@
+class Solution(object):
+    def containsDuplicate(self, nums):
+        nums2 = set(nums)
+        if len(nums) == len(nums2):
+            return False
+        else:return True
+   #efficient time and space
+  
+  
+  
+  class Solution(object):
+    def containsDuplicate(self, nums):
+        lst2 = Counter(nums)
+        for i in set(lst2.values()):
+            if i>1:
+                return True
+        return False
