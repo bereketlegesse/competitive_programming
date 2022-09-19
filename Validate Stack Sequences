@@ -1,0 +1,15 @@
+class Solution(object):
+    def validateStackSequences(self, pushed, popped):
+        stk = []
+        p = 0         #pointer 
+        for i in range(len(pushed)):
+            if pushed[i] != popped[p]:
+                stk.append(pushed[i])
+            if pushed[i] == popped[p]:
+                p += 1
+                while p < len(popped) and stk and stk[-1] == popped[p]:
+                    stk.pop()
+                    p+= 1
+        return stk[:] == stk[::-1]
+            
+            
