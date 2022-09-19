@@ -1,0 +1,15 @@
+class Solution(object):
+    def moveZeroes(self, nums):
+        l = 0     #left and right pointer
+        r = 0
+        while l <= r and r <len(nums):
+            if nums[l] == 0:
+                while r < len(nums) and nums[r] == 0:
+                    r += 1
+                if r <len(nums):
+                    nums[l] = nums[r]
+                    nums[r] = 0
+            l += 1
+            r = l
+        return nums
+        
