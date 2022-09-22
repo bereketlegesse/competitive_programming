@@ -1,0 +1,20 @@
+class Solution(object):
+    def checkSubarraySum(self, nums, k):
+        rmap = dict()
+        total = 0
+        for i ,n in enumerate(nums):
+            if n == 0 and i < len(nums) -1 and nums[i+1]==0:   #consecutive zeros
+                return True
+            total +=n
+            r = total % k
+            if r not in rmap:
+                rmap[r] = i
+            if r == 0 and i >= 1:
+                return True
+            if r in rmap and i-rmap[r] > 1:
+                return True
+        return False
+    
+    
+# O(n)
+# the concept of modulus discrete math
