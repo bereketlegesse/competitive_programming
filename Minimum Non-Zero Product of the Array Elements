@@ -1,0 +1,6 @@
+class Solution:
+  def minNonZeroProduct(self, p: int) -> int:
+      mod = 10**9+7
+      h = 2**p - 2                                   
+      n = 2**(p-1)-1
+      return ((pow(h,n,mod))*(h+1))%mod
