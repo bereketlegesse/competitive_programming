@@ -1,0 +1,8 @@
+class Solution:
+    def findTheWinner(self, n, k):
+        players = [i for i in range(n)]
+        cur = 0
+        for _ in range(n - 1):
+            cur = (cur + k - 1) % len(players)
+            players.pop(cur)    
+        return players[0] + 1
