@@ -1,0 +1,15 @@
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        result = 0
+        stk = deque()
+        for i in s:
+            if i not in stk:
+                stk.append(i)
+            else:
+                result = max(result,len(stk))
+                while stk and i in stk:
+                    stk.popleft()
+                stk.append(i)
+        result = max(result,len(stk))
+        return result
+                
