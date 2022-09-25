@@ -1,0 +1,9 @@
+import itertools  , heapq
+class Solution(object):
+    def kthSmallest(self, matrix, k):
+        matrix = list(itertools.chain(*matrix))
+        heapq.heapify(matrix)
+        for i in range(k-1):
+            heapq.heappop(matrix)
+        return heapq.heappop(matrix)
+        
