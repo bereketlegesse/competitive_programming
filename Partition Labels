@@ -1,0 +1,16 @@
+class Solution(object):
+    def partitionLabels(self, s):
+        lastidx = dict()
+        for i,n in enumerate(s):   #store the last index
+            lastidx[n] = i
+        right, length = 0,0
+        ans = []
+        for i, n in enumerate(s):
+            right = max(right, lastidx[n])
+            if i == right:
+                ans.append(i - length + 1)
+                length = i + 1     
+        return ans
+    
+    
+#T(1) and M(1)
