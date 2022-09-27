@@ -1,0 +1,11 @@
+class Solution(object):
+    def minimumCardPickup(self, cards):
+        minlen = len(cards) + 1   
+        idx = dict()
+        for i,n in enumerate(cards):
+            if n in idx:
+                minlen = min( minlen,i-idx[n]+1)
+            idx[n] = i
+        if minlen == len(cards)+1: return -1     #indicates all elements are unique
+        return minlen
+        
