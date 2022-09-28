@@ -1,0 +1,14 @@
+class Solution(object):
+    def findRepeatedDnaSequences(self, s):
+        substring = set()
+        l,r = 0,9
+        result = []
+        while r < len(s):
+            if s[l:r+1] in substring and s[l:r+1] not in result:
+                result.append(s[l:r+1])
+            substring.add(s[l:r+1])
+            l+=1
+            r+=1
+        return result
+        
+                
