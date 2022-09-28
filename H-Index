@@ -1,0 +1,10 @@
+class Solution(object):
+    def hIndex(self, citations):
+        result = 0
+        citations.sort(key=lambda x :-x)
+        for i in range(len(citations)):
+            if i + 1 > citations[i]:
+                break
+            result = i + 1
+        return result
+    
