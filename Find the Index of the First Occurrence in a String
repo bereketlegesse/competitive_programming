@@ -1,0 +1,12 @@
+class Solution(object):
+    def strStr(self, haystack, needle):
+        p = 0
+        while p < len(haystack):
+            if haystack[p] != needle[0]:
+                p+=1
+            else:
+                if p+len(needle) <= len(haystack) and haystack[p:p+len(needle)] == needle[:]:
+                    return p
+                p += 1
+        return -1
+  
