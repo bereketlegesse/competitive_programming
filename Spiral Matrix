@@ -1,0 +1,16 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        result = [] 
+        self.loop(matrix,0,0,result)
+        return result
+    def loop(self,matrix,i,j,result):
+        if i < 0 or i >= len(matrix) or j < 0 or j>=len(matrix[0]) or matrix[i][j] == '#':
+            return
+        result.append(matrix[i][j])
+        matrix[i][j] = '#'
+        if j+1>=i:
+            self.loop(matrix,i,j+1,result)
+        self.loop(matrix,i+1,j,result)
+        self.loop(matrix,i,j-1,result)
+        self.loop(matrix,i-1,j,result)
+        
