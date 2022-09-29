@@ -1,0 +1,14 @@
+class Solution(object):
+    def findAnagrams(self, s, p):        
+        count = Counter(p)    
+        result = []           
+        hashmap = dict()
+        for i in range(0,len(s)-len(p)+1):
+            if i == 0: 
+                hashmap = Counter(s[:len(p)])
+            else:    
+                hashmap[s[i-1]] -= 1 
+                hashmap[s[i+len(p)-1]] += 1
+            if len(hashmap- count) == 0:
+                result.append(i)
+        return result
