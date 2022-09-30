@@ -1,0 +1,12 @@
+class Solution(object):
+    def numSubarraysWithSum(self, nums, goal):
+        count= defaultdict(int)
+        psum = 0
+        result = 0
+        count[0] = 1
+        for x in nums:
+            psum += x
+            if psum-goal in count:
+                result += count[psum-goal]
+            count[psum] += 1
+        return result
