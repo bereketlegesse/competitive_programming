@@ -1,0 +1,29 @@
+class Solution(object):
+    def threeSum(self, nums):
+        nums.sort()
+        cur = 0
+        result = []
+        while cur < len(nums)-2 and nums[cur] <= 0:
+            if cur != 0 and nums[cur] == nums[cur-1]:      #ignore repeated elements
+                cur += 1
+                continue
+            l = cur+1
+            r = len(nums)-1
+            while l < r:
+                twosum = nums[l] + nums[r]
+                if twosum == -nums[cur]:
+                    result.append([nums[cur],nums[l],nums[r]])
+                    r -= 1
+                    l += 1
+                    while l < r and nums[l-1] == nums[l]:
+                        l+= 1
+                elif twosum > -nums[cur]:
+                    twosum = nums[r-1]+nums[l]
+                    r-= 1
+                else:
+                    twosum = nums[r] + nums[l+1]
+                    l += 1
+            cur += 1
+        return result
+    
+#T(n^2) and M(1)
