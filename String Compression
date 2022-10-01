@@ -1,0 +1,23 @@
+class Solution(object):
+    def compress(self, chars):
+        idx = 0
+        l,r = 0,0
+        while r < len(chars):
+            s = chars[r]  
+            count = 0
+            while r < len(chars) and s[0] == chars[r]:
+                count += 1
+                r += 1   
+            r -= 1
+            if count == 1:
+                chars[idx] = s
+                idx += 1
+            else:
+                s = s + str(count)   
+                for i in range(len(s)):
+                    chars[idx] = s[i]
+                    idx += 1
+            l = r
+            r += 1
+        chars[:] = chars[:idx]
+        
