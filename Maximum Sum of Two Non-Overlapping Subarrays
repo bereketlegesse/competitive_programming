@@ -1,0 +1,27 @@
+class Solution:
+    def maxSumTwoNoOverlap(self, nums: List[int], firstlen: int, secondlen: int) -> int:
+        if len(nums)== firstlen+secondlen:
+            return sum(nums)
+        for i in range(1,len(nums)):
+            nums[i] = nums[i] + nums[i-1]
+        fmax = nums[firstlen-1]
+        ssum = nums[secondlen+firstlen-1] - fmax
+        result = fmax + ssum
+        for i in range(firstlen,len(nums)-secondlen):
+            fmax = max(fmax,nums[i]-nums[i-firstlen])
+            ssum = nums[i+secondlen]-nums[i]
+            result = max(res,fmax+ ssum)
+        smax = nums[secondlen-1]
+        fsum = nums[firstlen+secondlen]-smax
+        for i in range(secondlen,len(nums)-firstlen):
+            smax = max(smax,nums[i]-nums[i-secondlen])
+            fsum = nums[i+firstlen]-nums[i]
+            res = max(res,smax+ fsum)
+        return result
+    
+    
+#T(n) and M(1)
+            
+        
+        
+        
