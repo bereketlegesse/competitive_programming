@@ -1,0 +1,11 @@
+class Solution(object):
+    def numberOfSubarrays(self, nums, k):
+        pref=list({0:i if num%2==0 else 1 for i ,num in enumerate(nums)})
+        dico=defaultdict(int)
+        res=0
+        dico[0]=1
+        for num in pref:
+            if num-k in dico:
+                res+=dico[num-k]
+            dico[num]+=1
+        return res
