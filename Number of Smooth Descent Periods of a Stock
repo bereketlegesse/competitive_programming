@@ -1,0 +1,11 @@
+class Solution:
+    def getDescentPeriods(self, prices):
+        l = 0
+        r = 1
+        res = 1 
+        while r < len(prices):
+            while l < r and prices[r-1] - prices[r] != 1:
+                l += 1
+            res += r - l + 1
+            r += 1    
+        return res
