@@ -1,0 +1,20 @@
+class Solution(object):
+    def chalkReplacer(self, chalk, k):
+        psum = [chalk[0]]
+        for i in range(1,len(chalk)):
+            psum.append(chalk[i]+psum[-1])
+        if k == psum[-1]:
+            return 0
+        if k > psum[-1]:
+            k = k % psum[-1]
+        x = 0
+        for i,n in enumerate(psum):
+            x = k-n
+            if x == 0:
+                return i+1
+            elif x < 0:
+                return i
+  #T(n) and M(n)
+            
+        
+        
