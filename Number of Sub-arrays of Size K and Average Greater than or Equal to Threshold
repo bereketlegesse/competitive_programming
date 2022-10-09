@@ -1,0 +1,17 @@
+class Solution(object):
+    def numOfSubarrays(self, arr, k, threshold):
+        T = k*threshold        #min target sum
+        l = 0
+        r = k
+        _sum = sum(arr[:k])
+        result = 1 if _sum >= T else 0
+        while r < len(arr):
+            _sum += (arr[r]-arr[l])
+            if _sum >= T:
+                result += 1
+            r+=1
+            l+=1
+        return result
+        
+        
+  #T(n) and M(1)
