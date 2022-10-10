@@ -1,0 +1,19 @@
+class Solution:
+    def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
+        _map = list(zip(position,speed))
+        _map.sort(key = lambda x : -x[0])
+        stk = []
+        result = 0
+        time = []
+        def timecal(i,j):
+            ti = (target - i)/j
+            return ti
+        for i,j in _map:
+            time.append(timecal(i,j))
+        for i in time:
+            stk.append(i)
+            if len(stk)>1 and stk[-1]<=stk[-2]:
+                stk.pop()
+        return len(stk)
+                
+#T(nlogn) and M(n)
