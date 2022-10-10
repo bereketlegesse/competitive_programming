@@ -1,0 +1,29 @@
+class Solution():
+    def threeSumMulti(self, arr, target):
+        nums = sorted(list(set(arr)))
+        count = Counter(arr)
+        res = 0
+        for i in range(len(nums)):
+            mid = i
+            r = len(nums)-1
+            while mid <= r:
+                _sum = nums[mid] + nums[r]
+                if _sum < (target - nums[i]):
+                    mid+=1
+                elif _sum > (target - nums[i]):
+                    r -= 1
+                else:
+                    if nums[i] < nums[mid] and nums[mid] < nums[r]:
+                        res += (count[nums[i]])*(count[nums[mid]])*(count[nums[r]])
+                    elif nums[i] < nums[mid] and nums[mid] == nums[r]:
+                        res += (count[nums[i]])*((count[nums[mid]]*(count[nums[mid]]-1))/2)
+                    elif nums[i]== nums[mid] and nums[mid]<nums[r]:
+                        res += (count[nums[i]]*(count[nums[i]]-1)*count[nums[r]])/2
+                    else:
+                        res += ((count[nums[i]]*(count[nums[i]]-1)*(count[nums[i]]-2))/6)
+                    mid += 1
+                    r -= 1
+        return res %(10**9+7)
+                        
+                        
+  #T(n^2) and M(n)       
