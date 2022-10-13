@@ -1,0 +1,15 @@
+class Solution(object):
+    def reverseParentheses(self, s):
+        stk = []
+        for i in s:
+            if i != ")":
+                stk.append(i)
+            else:
+                reverse = []
+                while stk and stk[-1] != "(":
+                    reverse.append(stk.pop())
+                stk.pop()
+                stk[:] = stk[:] + reverse[:]
+        return "".join(stk)
+                    
+        
