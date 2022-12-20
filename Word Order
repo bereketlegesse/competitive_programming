@@ -1,0 +1,13 @@
+from collections import Counter
+n = int(input())
+words = []
+for i in range(n):
+    x = input()
+    words.append(x)
+res = []
+count = Counter(words)
+print(len(count))
+for i in words:
+    if i in count:
+        print(count[i], end=" ")
+        count.pop(i)
