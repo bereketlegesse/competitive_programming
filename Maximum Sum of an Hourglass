@@ -1,0 +1,12 @@
+class Solution(object):
+    def maxSum(self, grid):
+        res = 0
+        for i in range(len(grid)-2):
+            for j in range(len(grid[0])-2):
+                res = max(res,sum(grid[i][j:j+3])+sum(grid[i+2][j:j+3])+grid[i+1][j+1])
+        return res
+ #T(n*m)
+ #M(1)
+
+        
+        
