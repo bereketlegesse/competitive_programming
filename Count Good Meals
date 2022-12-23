@@ -1,0 +1,26 @@
+class Solution:
+    def multiple_of_two(self, n):
+        x = 1
+        while x < n:
+            x *= 2
+        return x   #returns imediate multiple of 2
+        
+    def countPairs(self, deliciousness: List[int]) -> int:
+        ans = 0
+        count = Counter(deliciousness)
+        keys = sorted(list(set(deliciousness)))
+        
+        for key in keys:
+            if key==0:continue
+            target = self.multiple_of_two(key)-key
+            if target in count:
+                ans += count[target]*count[key]
+            if target == 0:
+                ans += ((count[key]-1)*count[key])//2
+                
+        ans%=((10**9)+7)
+        return ans
+
+
+        
+    
