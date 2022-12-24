@@ -1,0 +1,32 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        num1 = int(num1)
+        n = len(num2)
+        results = []
+
+        for i in range(n-1,-1,-1):
+            product = int(num2[i])*num1
+            results.append(product)
+
+        results = [str(n*(10**i)) for i,n in enumerate(results)]
+
+        total = []
+        max_product_len = len(results[-1])
+        product_lens = [len(i) for i in results]
+        carry = 0
+        ans = []
+
+        for i in range(1,max_product_len+1):
+            _sum = carry
+            for j in results:
+                if len(j)>=i:
+                    _sum += int(j[-i])
+            ans.append(str(_sum%10))
+            carry = _sum // 10
+            
+        if carry:
+            ans.append(str(carry))  
+            
+        ans.reverse()
+        ans = "".join(ans)
+        return ans
