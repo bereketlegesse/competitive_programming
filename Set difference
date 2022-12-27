@@ -1,0 +1,10 @@
+n = int(input())
+english = set(input().split())
+m = int(input())
+french = set(input().split())
+
+english_only = 0
+for i in english:
+    if i not in french:
+        english_only+= 1
+print(english_only)
