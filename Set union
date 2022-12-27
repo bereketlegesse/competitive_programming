@@ -1,0 +1,15 @@
+n = int(input())
+english = set(input().split())
+m = int(input())
+french = set(input().split())
+union = set()
+
+for i in english:
+    if i not in union:
+        union.add(i)
+   
+for i in french:
+    if i not in union:
+        union.add(i)
+   
+print(len(union))
