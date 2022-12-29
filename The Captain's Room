@@ -1,0 +1,13 @@
+from collections import Counter
+
+group_size = int(input())
+room_numbers = input().split()
+
+
+def findCapitainsRoom(group_size,room_numbers):
+    count = Counter(room_numbers)
+    for key in count.keys():
+        if count[key] != group_size:
+            return key
+
+print(findCapitainsRoom(group_size,room_numbers))
