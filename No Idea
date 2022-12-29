@@ -1,0 +1,12 @@
+n_and_m = input()
+n = input().split()
+a = set(input().split())
+b = set(input().split())
+happiness = 0
+
+for i in n:
+    if i in a:
+        happiness += 1
+    if i in b:
+        happiness -= 1
+print(happiness)
