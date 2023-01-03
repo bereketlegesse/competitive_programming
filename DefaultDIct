@@ -1,0 +1,16 @@
+from collections import defaultdict
+
+n, m = list(map(int, input().split()))
+indexA = defaultdict(list)
+groupA = []
+for i in range(n):
+    char = input()
+    indexA[char].append(i+1)
+
+for i in range(m):
+    char = input()
+    indices = indexA.get(char,-1)
+    if indices == -1:
+        print(indices)
+    else:
+        print(*indices)
