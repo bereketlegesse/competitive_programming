@@ -1,0 +1,17 @@
+class Solution(object):
+    def finWinners(self, matches):
+        wins = {i[0]:1 for i in matches}
+
+        for i in matches:
+            if i[1] not in wins:
+                wins[i[1]]=0
+            else:
+                wins[i[1]]-=1
+
+        res = [[],[]]
+        for i in wins.keys():
+            if wins[i]<=1:
+                res[0].append(i)
+
+        result = [sorted(res[0]),sorted(res[1])]
+        return result
