@@ -1,0 +1,22 @@
+from collections import Counter
+
+setA = list(map(int,input().split()))
+N = int(input())
+count_A = Counter(setA)
+super_set = True
+
+for i in range(N):
+    other_set = list(map(int,input().split()))
+    count_set = Counter(other_set)
+    if len(count_A.keys()) < len(count_set.keys()):
+        super_set = False
+        break
+    
+    for key in count_set.keys():
+        count_key = count_A.get(key,0)
+        if count_key == 0:
+            super_set = False
+            break
+
+print(super_set)
+            
