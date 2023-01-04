@@ -1,0 +1,31 @@
+class Solution:
+    def sumEvenAfterQueries(self, nums: List[int], queries: List[List[int]]) -> List[int]:
+        answer = []
+        even_sum = 0
+        for i in nums:
+            if i % 2==0:
+                even_sum += i
+
+        for query in queries:
+            val, index  = query
+
+            if nums[index]%2==0 and val%2==0:
+                even_sum += val
+                nums[index] += val
+                answer.append(even_sum)
+
+            elif nums[index]%2==1 and val%2==1:
+                even_sum += (nums[index]+val)
+                nums[index] += val
+                answer.append(even_sum)
+
+            elif nums[index]%2==0 and val%2==1:
+                even_sum -= nums[index]
+                nums[index] += val
+                answer.append(even_sum)
+                
+            else:
+                nums[index] += val
+                answer.append(even_sum)
+
+        return answer
