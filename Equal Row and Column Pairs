@@ -1,0 +1,15 @@
+class Solution:
+    def equalPairs(self, grid: List[List[int]]) -> int:
+        n = len(grid[0])
+        pairs = 0
+        grid = [tuple(i) for i in grid]
+        rows = Counter(grid)
+        
+        for i in range(n):
+            col = []
+            for j in range(n):
+                col.append(grid[j][i])
+            col = tuple(col)
+            pairs += rows.get(col,0)
+            
+        return pairs
