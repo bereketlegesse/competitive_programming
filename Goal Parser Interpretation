@@ -1,0 +1,16 @@
+class Solution(object):
+    def interpret(self, command):
+        stack = []
+        for i in command:
+            if i == ")":
+                if stack[-1] == "(":
+                    stack.pop()
+                    stack.append("o")
+                else:
+                    for i in range(3):
+                        stack.pop()
+                    stack.append("al")
+            else:
+                stack.append(i)
+
+        return "".join(stack)
