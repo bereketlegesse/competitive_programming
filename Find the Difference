@@ -1,0 +1,6 @@
+class Solution(object):
+    def findTheDifference(self, s, t):
+        count1 = Counter(s)
+        count2 = Counter(t)
+        return (count2-count1).keys()[0]
+        
