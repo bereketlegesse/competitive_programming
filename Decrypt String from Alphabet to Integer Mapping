@@ -1,0 +1,15 @@
+class Solution(object):
+    def freqAlphabets(self, s):
+        s = [i for i in s]
+        string = []
+
+        while s:
+            if s[-1] == "#":
+                s.pop()
+                digit = s.pop()+ s.pop()
+                digit = int(digit[1]+digit[0])
+                string.append(chr(96+digit))
+            else:
+                string.append(chr(96+int(s.pop())))
+
+        return "".join(string[::-1])
