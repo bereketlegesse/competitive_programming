@@ -1,0 +1,23 @@
+test_cases = int(input())
+
+for i in range(test_cases):
+    n = int(input())
+    blocks = list(map(int,input().split()))
+    left = 0
+    right = len(blocks) -1 
+    previous = max(blocks[left],blocks[right])
+    while n > 0 and left <= right:
+        if blocks[left] < blocks[right] and (previous >= blocks[right]):
+            previous = blocks[right]
+            right -= 1
+            n -= 1
+        elif blocks[left]>=blocks[right] and (previous >= blocks[left]):
+            previous = blocks[left]
+            left += 1
+            n -= 1
+        else:
+            break
+    if n == 0:
+        print("Yes")
+    else:
+        print("No")
