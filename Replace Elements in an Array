@@ -1,0 +1,10 @@
+class Solution:
+    def arrayChange(self, nums: List[int], operations: List[List[int]]) -> List[int]:
+        nums = {n:i for i,n in enumerate(nums)}
+        
+        for i in operations:
+            nums[i[1]] = nums[i[0]]
+            nums.pop(i[0])
+            
+        nums = sorted(nums.items(),key = lambda x : x[1])
+        return [i[0] for i in nums]
