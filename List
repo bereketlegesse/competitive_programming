@@ -1,0 +1,25 @@
+n = int(input())
+commands = {"insert":1,"print":2,"remove":3,"append":4,"sort":5,"pop":6,"reverse":7}
+array = []
+for i in range(n):
+    command = input().split()
+    if commands[command[0]] == 1:
+        array.insert(int(command[1]),int(command[2]))
+    elif commands[command[0]] == 2:
+        print(array)
+    elif commands[command[0]] == 3:
+        array.remove(int(command[1]))
+    elif commands[command[0]] == 4:
+        array.append(int(command[1]))
+    elif commands[command[0]] == 5:
+        array.sort()
+    elif commands[command[0]] == 6:
+        array.pop()
+    else:
+        array.reverse()
+        
+        
+        
+    
+    
+    
