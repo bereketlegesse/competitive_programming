@@ -1,0 +1,8 @@
+def swap_case(s):
+    s = [i for i in s]
+    for i in range(len(s)):
+        if ord(s[i])>96:
+            s[i] = s[i].upper()
+        else:
+            s[i] = s[i].lower()
+    return "".join(s)
