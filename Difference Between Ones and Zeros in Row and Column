@@ -1,0 +1,22 @@
+class Solution:
+    def onesMinusZeros(self, grid: List[List[int]]) -> List[List[int]]:
+        n = len(grid)
+        m = len(grid[0])
+        row_count = [0 for i in range(n)]
+        col_count = [0 for i in range(m)]
+
+        for i,row in enumerate(grid):
+            for j,k in enumerate(row):
+                if k == 1:
+                    row_count[i] += 1
+                    col_count[j] += 1
+        
+        for row in range(n):
+            for col in range(m):
+                zerosRow = m-row_count[row]
+                zerosCol = n -col_count[col]
+                diff = row_count[row] + col_count[col] - zerosRow - zerosCol
+                grid[row][col] = diff
+        
+        return grid
+
