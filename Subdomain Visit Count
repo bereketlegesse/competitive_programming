@@ -1,0 +1,15 @@
+class Solution(object):
+    def subdomainVisits(self, cpdomains):
+        count_paired_domains = defaultdict(int)
+
+        for i in cpdomains:
+            rep,domains = i.split()
+            count_paired_domains[domains] += int(rep)
+            
+            for j in range(len(domains)-1,0,-1):
+                if domains[j]==".":
+                    count_paired_domains[domains[j+1:]]+=int(rep)
+                    
+        count_paired_domains = [" ".join([str(i[1]),i[0]]) for i in count_paired_domains.items()]
+        return count_paired_domains
+                    
