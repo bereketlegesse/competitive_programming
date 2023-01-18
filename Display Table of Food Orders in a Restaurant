@@ -1,0 +1,27 @@
+class Solution:
+    def displayTable(self, orders: List[List[str]]) -> List[List[str]]:
+        food_items = set()
+        tables = set()
+        n = len(orders)
+
+        for i in orders:
+            food_items.add(i[-1])
+            tables.add(i[-2])
+
+        food_items = list(sorted(food_items))
+        tables = list(sorted(tables,key=lambda x: int(x)))
+
+        display_table = [[str(0) for i in range(len(food_items)+1)] for i in range(len(tables)+1)]
+        display_table[0] = ["Table"]+food_items
+
+        food_items = {food_items[i]:i+1 for i in range(len(food_items))}
+        tables = {tables[i]:i+1 for i in range(len(tables))}
+        
+
+        for i in orders:
+            table = i[1]
+            food_item = i[-1]
+            display_table[tables[table]][0] = table
+            display_table[tables[table]][food_items[food_item]]=str(int(display_table[tables[table]][food_items[food_item]])+1)
+
+        return display_table
