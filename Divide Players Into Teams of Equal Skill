@@ -1,0 +1,20 @@
+class Solution:
+    def dividePlayers(self, skill: List[int]) -> int:
+        total_skill = (sum(skill)/len(skill))*2
+        count = Counter(skill)
+        chemistry = 0
+
+        if total_skill != int(total_skill):
+            return -1
+        
+        for i in skill:
+            if count[i]:
+                pair = total_skill-i
+                if count[pair]:
+                    chemistry += pair*i
+                    count[i] -= 1
+                    count[pair] -= 1
+                else:
+                    return -1
+                    
+        return int(chemistry)
