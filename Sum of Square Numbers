@@ -1,0 +1,16 @@
+class Solution(object):
+    def judgeSquareSum(self, c):
+        if c <= 2:
+            return True
+
+        left = 0
+        right = int(c**(0.5))
+        while left <= right: 
+            if c == (left**2 + right**2):
+                return True
+            elif c < (left**2 + right**2):
+                right -= 1
+            else:
+                left += 1
+                
+        return False
