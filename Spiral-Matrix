@@ -1,0 +1,28 @@
+class Solution(object):
+    def spiralOrder(self, matrix):
+        cur_dx, cur_dy = 0, 1
+        cur_x, cur_y = 0, 0
+        spiral = [matrix[0][0]]
+        m, n = len(matrix[0]), len(matrix)
+        visited = {0}
+        inbound = lambda x, y : 0 <= x < n and 0 <= y < m
+
+        while len(spiral) < m*n:
+            cur_x += cur_dx
+            cur_y += cur_dy
+    
+            if cur_x * m + cur_y in visited or not inbound(cur_x, cur_y):
+                cur_x -= cur_dx
+                cur_y -= cur_dy
+                cur_dx, cur_dy = cur_dy, -1 * cur_dx
+            else:
+                spiral.append(matrix[cur_x][cur_y])
+                visited.add(cur_x * m + cur_y)
+
+        return spiral
+            
+
+            
+            
+
+        
