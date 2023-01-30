@@ -1,0 +1,25 @@
+class Solution:
+    def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
+        n = len(matrix)
+        m = len(matrix[0])
+        for i in range(n-2,0,-1):
+            row = i
+            col = 0
+            diagonal= []
+            while row <n and col<m:
+                diagonal.append(matrix[row][col])
+                row += 1
+                col += 1
+            if len(set(diagonal))!=1:
+                return False
+        for i in range(m):
+            row = 0
+            col = i
+            diagonal= []
+            while row<n and col<m:
+                diagonal.append(matrix[row][col])
+                row += 1
+                col += 1
+            if len(set(diagonal))!=1:
+                return False
+        return True
