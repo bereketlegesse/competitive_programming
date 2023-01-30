@@ -1,0 +1,18 @@
+class Solution(object):
+    def replaceElements(self, arr):
+        if len(arr) == 1:
+            return [-1]
+
+        queue = deque()
+        for i,n in enumerate(arr):
+            while queue and queue[-1][0] < n:
+                queue.pop()
+            queue.append([n,i])
+        for i in range(len(arr)-1):
+            if i != queue[0][1]:
+                arr[i] = queue[0][0]
+            else:
+                queue.popleft()
+                arr[i] = queue[0][0]
+        arr[-1] = -1
+        return arr
