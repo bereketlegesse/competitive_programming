@@ -1,0 +1,17 @@
+class Solution(object):
+    def setZeroes(self, matrix):
+        rows = set()
+        cols = set()
+
+        for i,n in enumerate(matrix):
+            for j,k in enumerate(n):
+                if k == 0:
+                    rows.add(i)
+                    cols.add(j)
+
+        for i,n in enumerate(matrix):
+            for j,k in enumerate(n):
+                if j in cols or i in rows:
+                    matrix[i][j] = 0
+                    
+        return matrix
