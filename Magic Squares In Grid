@@ -1,0 +1,46 @@
+class Solution(object):
+    def numMagicSquaresInside(self, grid):
+        n = len(grid)
+        m = len(grid[0])
+        def check_col(i,j):
+            _sum = [0,0,0]
+            for col in range(j,j+3):
+                for row in range(i,i+3):
+                    _sum[col-j] += grid[row][col]
+            return _sum
+
+        def check_row(i,j):
+            _sum = []
+            for row in range(i,i+3):
+                _sum.append(sum(grid[row][j:j+3]))
+            return _sum
+
+        def diagonals(i,j):
+            forward = grid[i][j] + grid[i+1][j+1] + grid[i+2][j+2]
+            backward = grid[i+2][j] + grid[i+1][j+1] + grid[i][j+2]
+            return [forward,backward]
+
+        def check_magic(i,j):
+            elements = []
+            for row in range(i,i+3):
+                for col in range(j,j+3):
+                    elements.append(grid[row][col])
+            if max(elements) == 9 and min(elements)==1 and len(set(elements)) == 9:
+                return True
+            return False
+
+        count = 0
+        for i in range(n-2):
+            for j in range(m-2):
+                if check_magic(i,j):
+                    sums = check_row(i,j)
+                    sums+=check_col(i,j)
+                    sums.append(diagonals(i,j)[0])
+                    sums.append(diagonals(i,j)[1])
+                    if len(set(sums))==1:
+                        count+= 1                
+        return count
+
+
+
+        
