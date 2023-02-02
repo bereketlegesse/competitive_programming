@@ -1,0 +1,20 @@
+class Solution:
+    def largestLocal(self, grid: List[List[int]]) -> List[List[int]]:
+        n = len(grid)
+        m = len(grid[0])
+        matrix = []
+        def largest_local(i,j):
+            local_max = grid[i][j]
+            for row in range(i,i+3):
+                for col in range(j,j+3):
+                    local_max = max(local_max,grid[row][col])
+            return local_max
+
+        
+        for row in range(n-2):
+            _max = []
+            for col in range(m-2):
+                _max.append(largest_local(row,col))
+            matrix.append(_max)
+        return matrix
+        
