@@ -1,0 +1,18 @@
+class Solution:
+    def minDeletionSize(self, strs: List[str]) -> int:
+        n = len(strs)
+        m = len(strs[0])
+        no_cols = 0
+
+        for i in range(m):
+            prev = strs[0][i]
+            for j in range(1,n):
+                if strs[j][i]<prev:
+                    no_cols += 1
+                    break
+                else:
+                    prev = strs[j][i]
+
+        return no_cols
+                    
+        
