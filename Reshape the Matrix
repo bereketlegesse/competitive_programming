@@ -1,0 +1,20 @@
+class Solution:
+    def matrixReshape(self, mat: List[List[int]], r: int, c: int) -> List[List[int]]:
+        n = len(mat)
+        m = len(mat[0])
+        matrix = []
+
+        if r*c == n*m:
+            i = 0
+            j = 0
+            for k in range(r):
+                cur = []
+                while len(cur) < c:
+                    cur.append(mat[i][j])
+                    j += 1
+                    if j == m:
+                        i += 1
+                        j = 0
+                matrix.append(cur)
+
+        return matrix if matrix else mat
