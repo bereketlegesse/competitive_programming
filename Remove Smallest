@@ -1,0 +1,16 @@
+t = int(input())
+for i in range(t):
+    n = int(input())
+    arr = list(map(int,input().split()))
+    k = 0
+    arr.sort()
+    
+    for i in range(n-1):
+        if arr[i]+1 < arr[i+1]:
+            k += 1
+            break
+            
+    if k ==0 :
+        print("YES")
+    else:
+        print("NO")
