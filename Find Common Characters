@@ -1,0 +1,16 @@
+class Solution:
+    def commonChars(self, words: List[str]) -> List[str]:
+        words = [Counter(i) for i in words]
+        lastWord = words.pop()
+        duplicates = []
+        for keys in lastWord:
+            freq = lastWord[keys]
+            for i in words:
+                freq = min(i[keys],freq)
+            letters = [keys for i in range(freq)]
+            duplicates.extend(letters)
+        return duplicates
+
+
+
+        
