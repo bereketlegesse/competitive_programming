@@ -1,0 +1,16 @@
+class Solution(object):
+    def matchPlayersAndTrainers(self, players, trainers):
+        players.sort()
+        trainers.sort()
+        x = len(trainers)
+        result = len(players)
+        for i in range(len(players)):
+            if not trainers:
+                return x
+            elif players[-1] > trainers[-1]:
+                result -= 1
+                players.pop()
+            else:
+                trainers.pop()
+                players.pop()
+        return result
