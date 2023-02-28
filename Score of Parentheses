@@ -1,0 +1,19 @@
+class Solution(object):
+    def scoreOfParentheses(self, s):
+        stk = []
+        for i in s:
+            if i =="(":
+                stk.append(i)
+                
+            else:
+                if stk[-1]=="(":
+                    stk.pop()
+                    stk.append(1)
+                else:
+                    prev = 0
+                    while stk and stk[-1] != "(":
+                        prev += stk.pop()
+                    stk.pop()
+                    stk.append(2*(prev))
+        
+        return sum(stk)
