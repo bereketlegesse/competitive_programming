@@ -1,0 +1,23 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        hashmap = dict()
+        hashmap[s[0]] = 1
+        left,right = 0,0
+        maxlen = 0
+        
+        while right < len(s) and left<= right:
+            if right - left + 1 - max(hashmap.values()) == k:
+                maxlen = max(maxlen,right - left + 1)
+                right += 1
+                if right < len(s):
+                    hashmap[s[right]] = 1 + hashmap.get(s[right],0)
+            elif (right - left + 1) - max(hashmap.values())> k:
+                hashmap[s[left]] -= 1
+                left+=1
+            else:
+                maxlen = max(maxlen,right - left + 1)
+                right += 1
+                if right < len(s):
+                    hashmap[s[right]] = 1 + hashmap.get(s[right],0)
+                    
+        return maxlen
