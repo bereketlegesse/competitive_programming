@@ -1,0 +1,17 @@
+class Solution(object):
+    def timeRequiredToBuy(self, tickets, k):
+        n = len(tickets)
+        indices = deque([i for i in range(n)])
+        timeTaken = 0
+
+        while len(indices) > 1:
+            front = indices.popleft()
+            tickets[front] -= 1
+            timeTaken += 1
+
+            if tickets[front]:
+                indices.append(front)
+            if front == k and tickets[front] == 0:
+                return timeTaken  
+                      
+        return timeTaken + tickets[k]
