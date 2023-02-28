@@ -1,0 +1,20 @@
+class Solution:
+    def simplifyPath(self, path: str) -> str:
+        clonicalPath = ["/"]
+        path = list(path.split("/"))
+        
+        for i in path:
+            if i == "/" or i=="":
+                continue
+
+            if len(clonicalPath)>1 and i == "..":
+                clonicalPath.pop()
+                clonicalPath.pop()
+            elif i !=".." and i != ".":
+                clonicalPath.append(i)
+                clonicalPath.append("/")
+          
+        if len(clonicalPath) > 1:
+            clonicalPath.pop()
+        
+        return "".join(clonicalPath)
