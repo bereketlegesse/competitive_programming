@@ -1,0 +1,20 @@
+class Solution(object):
+    def removeDuplicateLetters(self, s):
+        seen = set()
+        stk = []
+        lastidx = dict()
+        
+        for i,n in enumerate(s):
+            lastidx[n] = i
+            
+        for i,n in enumerate(s):
+            if n in seen:
+                continue
+            while stk and stk[-1] >= n and lastidx[stk[-1]] > i:
+                seen.remove(stk[-1])
+                stk.pop()
+                
+            stk.append(n)
+            seen.add(n)
+            
+        return "".join(stk)
