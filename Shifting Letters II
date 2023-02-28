@@ -1,0 +1,26 @@
+class Solution(object):
+    def shiftingLetters(self, s, shifts):
+        psum = [0]*(len(s)+1)
+        res = []
+
+        for i in shifts:
+            if i[-1] == 1:
+                psum[i[0]] +=1
+                psum[i[1]+1] -= 1
+            else:
+                psum[i[0]] -= 1
+                psum[i[1]+1] +=1
+
+        for i in range(1,len(psum)):
+            psum[i] = (psum[i-1] + psum[i])%26
+
+        psum[0] = psum[0]%26
+        for i,n in enumerate(s):
+            x = ord(n) + psum[i]
+            if x > 122:
+                x= (x%122) + 96
+            res.append(chr(x))
+            
+        return "".join(res)
+
+            
