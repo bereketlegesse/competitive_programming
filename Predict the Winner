@@ -1,0 +1,15 @@
+class Solution(object):
+    def PredictTheWinner(self, nums):
+        left ,right = 0, len(nums)-1
+        player1,player2 = 0,0
+        turnA = 0
+     
+        def branches(left,right,player1 ,player2,turnA):
+            if left > right:
+                return player1 >= player2
+            if turnA:
+                return branches(left+1, right, player1+nums[left], player2, 1 - turnA) or branches(left, right-1, player1 + nums[right], player2, 1 - turnA)
+                
+            return branches(left + 1, right, player1, player2+nums[left], 1 - turnA) and branches(left, right -1, player1,player2 + nums[right], 1 - turnA)
+            
+        return branches(left, right, player1, player2, 1)
