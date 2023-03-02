@@ -1,0 +1,21 @@
+class Solution(object):
+    def nextGreaterElements(self, nums):
+        _max = max(nums)
+        stk = []
+        result = [None]*len(nums)
+        
+        for i,n in enumerate(nums):
+            while stk and stk[-1][0] < n:
+                a,b = stk.pop()
+                result[b] = n
+            stk.append([n,i])
+            
+        for i in range(len(result)):
+            if nums[i]== _max:
+                result[i] = -1
+            elif result[i] == None:
+                for j in nums:
+                    if j > nums[i]:
+                        result[i] = j
+                        break
+        return result
