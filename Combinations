@@ -1,0 +1,16 @@
+class Solution(object):
+    def combine(self, n, k):
+        store = []
+        
+        def backtrack(a,arr):
+            if len(arr) == k:
+                store.append(arr)
+                return 
+
+            for i in range(a,n+1):
+                arr.append(i)
+                backtrack(i+1,arr)
+                arr.pop()
+
+        backtrack(1,[])
+        return store
