@@ -1,0 +1,25 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def init(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def averageOfSubtree(self, root: Optional[TreeNode]) -> int:
+        count = [0]
+        def postTraversal(node):
+            if not node:
+                return (0, 0)
+
+            left = postTraversal(node.left)
+            right = postTraversal(node.right)
+
+            total = left[0] + right[0] + node.val
+            n = left[1] + right[1] + 1
+
+            if total//n == node.val:
+                count[0] += 1
+            return (total, n)
+            
+        postTraversal(root)
+        return count[0]
