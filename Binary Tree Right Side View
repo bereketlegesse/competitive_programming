@@ -1,0 +1,20 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def init(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def traversal(self, node, level, store):
+        if not node:
+            return
+        
+        store[level] = node.val
+        self.traversal(node.left, level+1, store)
+        self.traversal(node.right, level+1, store)
+        
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        store = defaultdict(int)
+        self.traversal(root, 0, store)
+        
+        return list(store.values())
