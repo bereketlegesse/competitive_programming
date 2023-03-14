@@ -1,0 +1,24 @@
+class Solution(object):
+    def distributeCookies(self, cookies, k):
+        self.maxTotal = float("inf")
+        n = len(cookies)
+        bucket = [0 for i in range(k)]
+        
+        cookies.sort(reverse = True)
+        def backtrack(index):
+           
+            if index >= n:
+                self.maxTotal = min(self.maxTotal,max(bucket))
+                return 
+
+            if max(bucket) >= self.maxTotal:
+                return 
+
+            for j in range(k):
+            
+                bucket[j] += cookies[index]
+                backtrack(index+1)
+                bucket[j] -= cookies[index]
+
+        backtrack(0)
+        return self.maxTotal
