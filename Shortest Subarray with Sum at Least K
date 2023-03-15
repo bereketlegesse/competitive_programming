@@ -1,0 +1,23 @@
+class Solution:
+    def shortestSubarray(self, nums: List[int], k: int) -> int:
+        runningSum = 0
+        queue = deque()
+        minLength = len(nums) + 1
+
+        for i,n in enumerate(nums):
+            runningSum += n    
+            if runningSum >= k:
+                minLength = min(minLength ,i+1)
+
+            while queue and queue[-1][0] >= runningSum:
+                queue.pop()
+            queue.append((runningSum,i))
+            
+            while queue and runningSum - queue[0][0] >= k:
+                prefixSum,index = queue.popleft()
+                minLength = min(i-index,minLength)
+
+        return minLength if minLength < len(nums)+1 else -1
+
+
+        
