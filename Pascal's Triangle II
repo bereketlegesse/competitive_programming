@@ -1,0 +1,16 @@
+class Solution:
+    def getRow(self, rowIndex: int) -> List[int]:
+        result = [1]
+        def pascalCal(row,result):
+            if row > rowIndex:
+                return result
+
+            curRow = [1]
+            for i in range(0,row-1):
+                curRow.append(result[i]+result[i+1])
+            curRow.append(1)
+            
+            result = [i for i in curRow]
+            return pascalCal(row+1,result)
+        
+        return pascalCal(1,result)
