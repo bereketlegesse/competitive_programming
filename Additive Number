@@ -1,0 +1,19 @@
+class Solution:
+    def isAdditiveNumber(self, num: str) -> bool:
+        n = len(num)
+
+        def backtrack(index,first= None ,second= None, third=None):
+            if index == n and  first and second and third:
+                return True
+            if index== n and not first:
+                return False
+            
+            for i in range(index,n):
+                cur = num[index:i+1]
+                if not second or not third or int(cur) == int(second) + int(third):
+                    if backtrack(i+1,second,third,cur):
+                        return True
+                if num[index] == "0":
+                    break
+
+        return backtrack(0,None,None,None)
