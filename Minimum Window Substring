@@ -1,0 +1,19 @@
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        countT = Counter(t)
+        n = len(s)
+        window = [0,n+1,n+1]   #start,end,length
+        left = 0
+        
+        for i in range(n):
+            if s[i] in countT:
+                countT[s[i]] -= 1
+                
+            while max(countT.values()) <= 0:
+                if i-left+1 < window[-1]:
+                    window = [left,i,i-left+1]
+                if s[left] in countT:
+                    countT[s[left]] += 1
+                left += 1
+            
+        return s[window[0]:window[1]+1] if window[-1] <= n else ""
