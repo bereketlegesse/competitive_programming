@@ -1,0 +1,24 @@
+class Solution:
+    def sumSubarrayMins(self, arr: List[int]) -> int:
+        stack = deque()  #leftBound , index
+        Sum = 0
+        N = len(arr)
+        for i,n in enumerate(arr):
+            leftBound = i
+            while stack and arr[stack[-1][1]] > n:
+                leftBound,index = stack.pop()
+                left = index - leftBound
+                right = i - index - 1
+                subarrays = left + right + (left*right) + 1
+                Sum += subarrays*arr[index]
+
+            stack.append((leftBound,i))
+
+        for i in stack:
+            leftBound,index = i
+            left = index - leftBound
+            right = N - index - 1
+            subarrays = left + right + (left*right) + 1
+            Sum += subarrays*arr[index]
+            
+        return Sum%(10**9 + 7)
