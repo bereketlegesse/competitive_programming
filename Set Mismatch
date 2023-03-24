@@ -1,0 +1,23 @@
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        i = 0
+        n = len(nums)
+        duplicates = set()
+        while i < n:
+            if nums[i]> n or i+1 == nums[i]:
+                i += 1
+            
+            elif nums[nums[i]-1] == nums[i]:
+                duplicates.add(nums[i])
+                i += 1
+            
+            else:
+                nums[nums[i]-1], nums[i] = nums[i], nums[nums[i]-1]
+
+        missing = []
+        for i,n in enumerate(nums):
+            if i + 1 != n and i+1 not in duplicates:
+                missing.append(i+1)
+        
+        return list(duplicates) + missing
+
