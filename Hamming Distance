@@ -1,0 +1,10 @@
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        count = 0
+        bitLen = max(x.bit_length(), y.bit_length())
+        
+        for i in range(bitLen):
+            count += (x & (1 << i)) >> i ^ (y & (1 << i)) >> i
+
+        return count
+        
