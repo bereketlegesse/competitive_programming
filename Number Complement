@@ -1,0 +1,9 @@
+class Solution:
+    def findComplement(self, num: int) -> int:
+        binary = bin(num)
+        binary = [i for i in binary]
+        for i in range(2, len(binary)):
+            binary[i] = str(1 - int(binary[i]))
+            
+        complement = "".join(binary)
+        return int(complement,2)
