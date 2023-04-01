@@ -1,0 +1,25 @@
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        N = len(nums)
+        Permutations = []
+        visited = 0
+        
+        def backtrack(cur):
+            nonlocal visited
+            if len(cur) == N:
+                curr = cur.copy()
+                Permutations.append(curr)
+                return
+
+            for i in range(len(nums)):
+                if (visited >> i) & 1:
+                    continue
+
+                cur.append(nums[i])
+                visited |= (1 << i)
+                backtrack(cur)
+                cur.pop()
+                visited &= ~(1 << i)
+
+        backtrack([])
+        return Permutations
