@@ -1,0 +1,7 @@
+class Solution:
+    def hasAlternatingBits(self, n: int) -> bool:
+        bitLen = n.bit_length()
+        for i in range(bitLen):
+            if not (n >> i) & 1 ^ (n >> (i+1))& 1:
+                return False
+        return True
