@@ -1,0 +1,13 @@
+class Solution:
+    def hasGroupsSizeX(self, deck: List[int]) -> bool:
+        count = Counter(deck)
+        gcd = count[deck[0]]
+        for key in count.keys():
+            gcd = self.GCD(gcd,count[key])
+        return gcd > 1
+
+
+    def GCD(self, a,b):
+        if b == 0:
+            return a
+        return self.GCD(b, a%b)
