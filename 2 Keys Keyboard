@@ -1,0 +1,21 @@
+class Solution:
+    def minSteps(self, n: int) -> int:
+        factors = self.factorize(n)
+        result = 0
+        for key in factors.keys():
+            result += (key*factors[key])
+        return result
+
+    def factorize(self,num):
+        sqrtt = num**(0.5)
+        factors = []
+
+        for i in range(2,int(sqrtt+1)):
+            while num % i==0:
+                factors.append(i)
+                num //= i
+
+        if num > 1:
+            factors.append(num)
+            
+        return Counter(factors)
