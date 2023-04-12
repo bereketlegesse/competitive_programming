@@ -1,0 +1,24 @@
+n = int(input())
+sources = {i for i in range(1,n+1)}
+sinks = {i for i in range(1, n+1)}
+adjList = []
+
+for i in range(n):
+    row = list(map(int, input().split()))
+    adjList.append(row)
+    
+for row in range(n):
+    for col in range(n):
+        if adjList[row][col] == 1:
+            if col + 1 in sources:
+                sources.remove(col + 1)
+            if row + 1 in sinks:
+                sinks.remove(row+1)
+                
+sources = sorted(list(sources))
+sinks = sorted(list(sinks))
+
+print(len(sources),*sources)
+print(len(sinks), *sinks)
+            
+    
