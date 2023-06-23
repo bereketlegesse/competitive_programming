@@ -1,0 +1,24 @@
+class Solution:
+    def champagneTower(self, poured: int, query_row: int, query_glass: int) -> float:
+        memo = dict()
+        if query_row == 0:
+            return min(1, poured)
+        def backtrack(r,c):
+            if r == 0 and c == 0:
+                memo[(r, c)] = max(0, (poured - 1)/2)
+                return max(0, (poured - 1)/2)
+
+            if c < 0 or r < 0:
+                return 0
+            if (r, c) in memo:
+                return memo[(r, c)]
+            
+            left = backtrack(r - 1, c - 1)
+            right = backtrack(r - 1, c)
+            memo[(r, c)] = max(0, (left + right - 1)/ 2)
+            return memo[(r, c)]
+
+        backtrack(query_row, query_glass)
+        ans = memo[(query_row - 1, query_glass)]
+        ans +=  memo[(query_row - 1, query_glass - 1)] if query_glass > 0 else 0
+        return min(1, ans)
