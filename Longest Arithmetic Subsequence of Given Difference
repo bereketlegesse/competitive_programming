@@ -1,0 +1,13 @@
+class Solution:
+    def longestSubsequence(self, arr: List[int], difference: int) -> int:
+        maxx = max(arr)
+        minn = min(arr)
+        dp = [0 for _ in range(maxx - minn + 1)]
+        if difference == 0:
+            return max(Counter(arr).values())
+        
+        for num in arr:
+            dp[num - minn] = 1
+            if maxx >= num - difference >= minn:
+                dp[num - minn] += dp[num - difference - minn]
+        return max(dp)
