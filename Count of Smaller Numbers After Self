@@ -1,0 +1,40 @@
+class Solution:
+    def countSmaller(self, nums: List[int]) -> List[int]:
+        ans = [0 for i in range(len(nums))]
+
+        def merge(arr1, arr2):
+            merged = []
+            while arr1 and arr2:
+                if arr1[-1][0] > arr2[-1][0]:
+                    merged.append(arr1.pop())
+                else:
+                    merged.append(arr2.pop())
+            
+            merged.extend(arr1[::-1])
+            merged.extend(arr2[::-1])
+            return merged[::-1]
+            
+
+        def mergeSort(left, right):
+            if left == right:
+                return [(nums[left], left)]
+
+            mid = right - (right - left)//2
+            sortedRight = mergeSort(mid, right)
+        
+            for i in range(left, mid):
+                count = bisect.bisect_left(sortedRight, (nums[i], i))
+                ans[i] += count
+
+            sortedLeft = mergeSort(left, mid - 1)
+            merged = merge(sortedLeft, sortedRight)
+           
+            return merged
+
+        mergeSort(0, len(nums) - 1)
+        return ans      
+            
+
+
+
+        
