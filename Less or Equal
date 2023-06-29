@@ -1,0 +1,12 @@
+n, k = map(int, input().split())
+sequence = list(map(int, input().split()))
+sequence.sort()
+
+if k == 0:
+    print(sequence[0] - 1 if sequence[0] > 1 else -1)
+elif k < n and  sequence[k] - sequence[k - 1] == 0:
+    print(-1)
+elif k < n:
+    print(sequence[k - 1])
+else:
+    print(sequence[-1])
