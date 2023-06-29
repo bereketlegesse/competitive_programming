@@ -1,0 +1,19 @@
+from collections import defaultdict
+
+row  = defaultdict(int)
+col = defaultdict(int)
+
+n,m = map(int, input().split())
+grid = []
+for i in range(n):
+    grid.append(input())
+    for j in range(m):
+        row[(i,grid[i][j])] += 1
+        col[(j, grid[i][j])] += 1
+ans = []
+for i in range(n):
+    for j in range(m):
+        if row[(i, grid[i][j])] == 1 and col[(j, grid[i][j])] == 1:
+            ans.append(grid[i][j])
+
+print("".join(ans))
