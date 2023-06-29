@@ -1,0 +1,56 @@
+t = int(input())
+for _ in range(t):
+    n, m = map(int, input().split())
+    board = []
+    for i in range(n):
+        row = list(map(int, input().split()))
+        board.append(row)
+    
+    forwardDiagonalSum = dict()
+    for i in range(n):
+        summ= 0 
+        r = i
+        c = 0
+        while r >= 0 and c < m:
+            summ += board[r][c]
+            r -= 1
+            c += 1
+        forwardDiagonalSum[i] = summ
+
+    for i in range(1,m):
+        summ = 0
+        r = n - 1
+        c = i
+        while c < m and r >= 0:
+            summ += board[r][c]
+            r -= 1
+            c += 1
+        forwardDiagonalSum[n - 1 + i] =  summ
+
+    backwardDiagonalSum = dict()
+    for i in range(n):
+        summ = 0
+        r = i
+        c= m -1
+        while c >= 0 and r >= 0:
+            summ += board[r][c]
+            r -= 1
+            c -= 1
+        backwardDiagonalSum[m - 1- i] = summ
+
+    for i in range(m - 1):
+        r = n - 1
+        c = i
+        summ = 0
+        while c >= 0 and r >= 0:
+            summ += board[r][c]
+            r -= 1
+            c -= 1
+        backwardDiagonalSum[i - n + 1] = summ
+
+    maxAttack = 0
+    for i in range(n):
+        for j in range(m):
+            maxAttack = max(maxAttack, forwardDiagonalSum[i + j] + backwardDiagonalSum[j - i] - board[i][j])
+
+    print(maxAttack)  
