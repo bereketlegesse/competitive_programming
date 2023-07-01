@@ -1,0 +1,12 @@
+merged = []
+n = input()
+arr1 = list(map(int, input().split()))
+arr2 = list(map(int, input().split()))
+while arr1 and arr2:
+    if arr1[-1] > arr2[-1]:
+        merged.append(arr1.pop())
+    else:
+        merged.append(arr2.pop())
+merged.extend(arr1[::-1])
+merged.extend(arr2[::-1])
+print(*merged[::-1])
