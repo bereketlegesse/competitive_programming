@@ -1,0 +1,12 @@
+n, m = map(int, input().split())
+arr1 = list(map(int, input().split()))
+arr2 = list(map(int, input().split()))
+answer = []
+
+i = -1
+for num in arr2:
+    while i + 1 < n and num > arr1[i + 1]:
+        i += 1    
+    answer.append(i + 1)
+    
+print(*answer)
