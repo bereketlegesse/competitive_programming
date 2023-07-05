@@ -1,0 +1,25 @@
+class Solution:
+    def wiggleMaxLength(self, nums: List[int]) -> int:
+        n = len(nums)
+        memo = dict()
+
+        def backtrack(index, length, lastNumber, diff):
+            if index == n:
+                return 0
+            
+            if (index, diff, lastNumber) in memo:
+                return memo[(index, diff, lastNumber)]
+
+            pick = 0
+            if (nums[index] - lastNumber)* diff > 0:
+                newDiff = -1 if diff == 1 else 1
+                pick = 1 + backtrack(index + 1, length + 1, nums[index], newDiff)
+
+            skip = backtrack(index + 1, length, lastNumber, diff)
+            
+            memo[(index, diff, lastNumber)] = max(skip, pick)
+            return max(skip, pick)
+
+        ans1 = backtrack(0, 0, 0, 1)
+        ans2 = backtrack(0, 0, max(nums) + 1, -1)
+        return max(ans1, ans2)
