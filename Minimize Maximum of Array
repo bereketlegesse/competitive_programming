@@ -1,0 +1,16 @@
+class Solution:
+    def minimizeArrayValue(self, nums: List[int]) -> int:
+        running_sum = nums[0]
+        n = len(nums)
+        minMax = min(nums)
+        minMax = max(minMax,running_sum)
+
+        for i in range(1,n):
+            running_sum += nums[i]
+            minMax = max(minMax,running_sum/(i+1))
+    
+        if minMax != int(minMax):
+            minMax += 1
+
+        return int(minMax)
+            
