@@ -1,0 +1,17 @@
+class Solution:
+    def candy(self, ratings: List[int]) -> int:
+        n = len(ratings)
+        candies = [0 for i in range(n)]
+
+        rating = [(ratings[i], i) for i in range(n)]
+        rating.sort()
+
+        for num, i in rating:
+            candy = 1
+            if i - 1 >= 0 and ratings[i - 1] < num:
+                candy = max(candy , candies[i - 1] + 1)
+            if i + 1 < n:
+                candy = max(candy, candies[i + 1] + 1)
+            candies[i] = candy
+ 
+        return sum(candies)
