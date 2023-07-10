@@ -1,0 +1,19 @@
+class Solution:
+    def longestArithSeqLength(self, nums: List[int]) -> int:
+        n = len(nums)
+        dp = []
+        maxLen = 1
+
+        for i in range(n):
+            cur = nums[i]
+            diff = dict()
+
+            for j in range(i):
+                diff[cur - nums[j]] = 1 + dp[j].get(cur - nums[j], 1)
+                maxLen = max(maxLen, diff[cur - nums[j]])
+                
+            dp.append(diff)
+
+        return maxLen
+
+
