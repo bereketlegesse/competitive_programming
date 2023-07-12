@@ -1,0 +1,23 @@
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        n = len(prices)
+        memo = dict()
+        def backtrack(index, bought):
+            if index >= n:
+                return 0
+
+            if (index, bought) in memo:
+                return memo[(index, bought)]
+
+            if bought >= 0:
+                profit1 = prices[index] - bought + backtrack(index + 2, -1)
+                profit2 = backtrack(index + 1, bought)
+                
+            else:
+                profit1 = backtrack(index + 1, -1)
+                profit2 = backtrack(index + 1, prices[index])
+            
+            memo[(index, bought)] = max(profit1, profit2)
+            return max(profit1, profit2)
+
+        return backtrack(0, -1)
