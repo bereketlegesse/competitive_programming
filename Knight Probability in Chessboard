@@ -1,0 +1,23 @@
+class Solution:
+    def knightProbability(self, n: int, k: int, row: int, column: int) -> float:
+        dirr = [(-1,-2), (-2,-1), (-2, 1), (-1,2), (1,2), (2,1), (2, -1), (1, -2)]
+        memo = dict()
+        
+        def backtrack(row, col, k):
+            if row >= n or row < 0 or col >= n or col < 0:
+                return 0
+
+            if k == 0:
+                return 1
+            
+            if (row, col, k) in memo:
+                return memo[(row, col, k)]
+
+            summ = 0
+            for r,c in dirr:
+                summ += backtrack(row + r, col + c, k - 1)
+            
+            memo[(row, col, k)] =  summ
+            return summ
+
+        return backtrack(row, column, k) / (8**k)
