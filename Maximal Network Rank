@@ -1,0 +1,16 @@
+class Solution:
+    def maximalNetworkRank(self, n: int, roads: List[List[int]]) -> int:
+        graph = defaultdict(list)
+        for edge in roads:
+            graph[edge[0]].append(edge[1])
+            graph[edge[1]].append(edge[0])
+        
+        networkRank = 0
+        for i in range(n):
+            for j in range(i + 1, n):
+                rank =  len(graph[i])+ len(graph[j])
+                if i in graph[j]:
+                    rank -= 1
+                networkRank = max(networkRank,rank)
+
+        return networkRank 
