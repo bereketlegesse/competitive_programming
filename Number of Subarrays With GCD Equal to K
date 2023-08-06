@@ -1,0 +1,15 @@
+class Solution:
+    def subarrayGCD(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        count = 0
+
+        for i in range(n):
+            gcd = nums[i]
+            for j in range(i, n):
+                gcd = math.gcd(gcd, nums[j])
+                if gcd == k:
+                    count += 1
+                    
+        return count
+            
+        
