@@ -1,0 +1,9 @@
+class Solution:
+    def topKFrequent(self, words: List[str], k: int) -> List[str]:
+        count = Counter(words)
+        frequency = []
+        for key in count:
+            heapq.heappush(frequency, (-count[key], key))
+        
+        result = [heapq.heappop(frequency)[1] for _ in range(k)]
+        return result
