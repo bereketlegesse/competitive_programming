@@ -1,0 +1,28 @@
+class Solution:
+    def closestPrimes(self, left: int, right: int) -> List[int]:
+        primes = [True for i in range(1000001)]
+        primes[0] = False
+        primes[1] = False
+        
+        p = 2
+        while (p * p <= 1000000):
+            if primes[p]:
+                k = p * p
+                while k <= 1000000:
+                    primes[k] = False
+                    k += p
+            p += 1
+        
+        prime = []
+        for i in range(left, right + 1):
+            if primes[i]:
+                prime.append(i)
+
+        if len(prime) < 2:
+            return [-1, -1]
+
+        minn = min([prime[i] - prime[i - 1] for i in range(1, len(prime))])
+        for i in range(1, len(prime)):
+            if prime[i]- prime[i-1] == minn:
+                return [prime[i - 1], prime[i]]
+  
