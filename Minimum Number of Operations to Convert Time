@@ -1,0 +1,16 @@
+class Solution:
+    def convertTime(self, current: str, correct: str) -> int:
+        current = int(current[0:2]) * 60 + int(current[3:5])
+        correct = int(correct[0:2]) * 60 + int(correct[3:5])
+
+        times = [60, 15, 5, 1]
+        res = 0
+       
+        while current != correct:
+            for i in times:
+                if current + i <= correct:
+                    current += i
+                    res += 1
+                    break
+
+        return res
