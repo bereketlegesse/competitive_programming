@@ -1,0 +1,15 @@
+class Solution:
+    def maxAlternatingSum(self, nums: List[int]) -> int:
+        n = len(nums)
+        @cache
+        def dp(index, idx):
+            if index == n:
+                return 0
+            
+            if idx:
+                return max(-nums[index] + dp(index + 1, 0), dp(index + 1, 1))
+
+            return max(nums[index] + dp(index + 1, 1), dp(index + 1, 0))
+
+        return dp(0, 0)
+            
