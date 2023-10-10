@@ -1,0 +1,18 @@
+class Solution:
+    def maxScore(self, nums: List[int]) -> int:
+        n = len(nums)
+        
+        @cache
+        def dp(mask):
+            score = 0
+            count = bin(mask)[2:].count("1") + 2
+            score = 0
+
+            for i in range(n):
+                for j in range(i + 1, n):
+                    if not (mask & 1 << i or mask & 1 << j):
+                        newMask = mask | 1 << i | 1 << j
+                        score = max(score, (count  // 2 )*math.gcd(nums[i], nums[j]) + dp(newMask))
+            return score
+
+        return dp(0)
