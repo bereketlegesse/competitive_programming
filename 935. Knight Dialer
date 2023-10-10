@@ -1,0 +1,26 @@
+class Solution:
+    def knightDialer(self, n: int) -> int:
+        inBound = lambda x, y:(0 <= x < 4 and 0 <= y < 3) and not(x == 3 and (y == 0 or y == 2))
+        dirr = [(-2, -1), (-2, 1), (2, -1), (2, 1), (-1, -2), (-1, 2), (1, -2), (1, 2)]
+        @cache
+        def dp(row, col, k):
+            if not k:
+                return 1
+            dest =  []
+            count = 0
+            for r, c in dirr:
+                if inBound(r + row, c + col):
+                    dest.append((r + row, c + col)) 
+
+            for newRow, newCol in dest:
+                count += dp(newRow, newCol, k - 1)
+                
+            return count
+
+        count = 0
+        for i in range(4):
+            for j in range(3):
+                if inBound(i,j):
+                    count += dp(i,j, n - 1)
+        
+        return count % (10**9 + 7)
