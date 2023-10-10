@@ -1,0 +1,20 @@
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        hash1 = 0
+        hash2 = 0
+        n, m = len(haystack), len(needle)
+        left = 0
+        for i in range(m):
+            hash1 += (ord(needle[i]) - ord('a') + 1)*(27**(m - i - 1))
+         
+        for i in range(n):
+            hash2 = hash2*27 + (ord(haystack[i]) - ord('a') + 1) 
+            if i - left + 1 == m: 
+                if i - left + 1 == m and hash2 == hash1:    
+                    return left
+                    
+                hash2 -=  (ord(haystack[left]) - ord('a') + 1)*(27**(m - 1))
+                left += 1
+        return  -1
+        
+        
