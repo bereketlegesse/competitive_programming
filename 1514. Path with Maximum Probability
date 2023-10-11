@@ -1,0 +1,28 @@
+class Solution:
+    def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start_node: int, end_node: int) -> float:
+        graph = {i:[] for i in range(n)}
+
+        for i in range(len(edges)):
+            a,b = edges[i]
+            p = succProb[i]
+            graph[a].append((b,p))
+            graph[b].append((a,p))
+        
+        visited = set()
+        queue = [(-1,start_node)]
+        while queue:
+            p, cur = heappop(queue)
+            
+            if cur == end_node:
+                return -p
+            if cur in visited:
+                continue
+
+            visited.add(cur)
+            for nei in graph[cur]:
+                heappush(queue, (nei[1] * p, nei[0]))
+
+        return 0
+
+
+        
