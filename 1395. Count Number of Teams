@@ -1,0 +1,29 @@
+class Solution:
+    def numTeams(self, rating: List[int]) -> int:
+        n = len(rating)
+        dp1 = [0 for _ in range(n)] 
+        dp2 = [0 for _ in range(n)] 
+        count = 0
+
+        for i in range (n):
+            for j in range (i+1, n):
+                if rating[i] > rating[j]:
+                    dp1[i] = dp1[i] + 1  
+
+        for i in range(n): 
+            for j in range(i):
+                if rating[i] > rating[j]:
+                    dp2[i] = dp2[i] + 1
+
+        for i in range(n):
+            for j in range(i+1, n):            
+                if rating[i] > rating[j]: 
+                    count = count + dp1[j]
+
+        for i in range (n):
+            for j in range (i):     
+                if rating[i] > rating[j]:
+                    count = count + dp2[j]
+                    
+        return count 
+        
