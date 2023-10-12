@@ -1,0 +1,57 @@
+# """
+# This is MountainArray's API interface.
+# You should not implement it, or speculate about its implementation
+# """
+#class MountainArray:
+#    def get(self, index: int) -> int:
+#    def length(self) -> int:
+
+class Solution:
+    def findInMountainArray(self, target: int, mountain_arr: 'MountainArray') -> int:
+        n = mountain_arr.length()
+
+        def binary_search(left, right, increasing):
+            if left > right:
+                return -1
+
+            mid = (left + right)//2
+            val = mountain_arr.get(mid)
+
+            if val == target:
+                return mid
+
+            if increasing and val > target:
+                right = mid - 1
+
+            elif increasing and val < target:
+                left = mid + 1
+
+            elif val < target:
+                right = mid - 1
+
+            else:
+                left = mid + 1
+
+            return binary_search(left, right, increasing)
+
+        
+        left = 0
+        right = n - 1
+
+        while left < right:
+            mid = (left + right)//2
+            val = mountain_arr.get(mid)
+            next = mountain_arr.get(mid + 1)
+
+            if val > next:
+                right = mid 
+            else:
+                left = mid + 1
+           
+    
+        left_search = binary_search(0, right, 1)
+        if left_search > -1:
+            return left_search
+        
+        return binary_search(right, n - 1, 0)
+        
