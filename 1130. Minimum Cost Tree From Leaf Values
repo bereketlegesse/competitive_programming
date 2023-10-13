@@ -1,0 +1,15 @@
+class Solution:
+    def mctFromLeafValues(self, arr: List[int]) -> int:
+        res = 0
+        
+        while len(arr) > 1:
+            idx = arr.index(min(arr))
+            if 0 < idx < len(arr) - 1:
+                res += arr[idx] * min(arr[idx - 1], arr[idx + 1])
+            elif idx == 0:
+                res += arr[idx] * arr[idx + 1] 
+            else: 
+                res += arr[idx] * arr[idx - 1]  
+            arr.pop(idx)
+        
+        return res
