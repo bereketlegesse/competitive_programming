@@ -1,0 +1,26 @@
+def detect_cycle(n, edges):
+    if len(edges) != n - 1:
+        return False
+    
+    graph = {i:[] for i in range(n)}
+    for a,b in edges:
+        graph[a].append(b)
+        graph[b].append(a)
+        
+    visited = set()
+    def dfs(node, prev):
+        if not graph[node]:
+            return True
+        
+        if node in visited:
+            return False
+        
+        visited.add(node)
+        res = True
+        for child in graph[node]:
+            if child == prev:
+                continue
+            res &= dfs(child, node)
+            
+        return res
+    return dfs(n -1, n - 1)
