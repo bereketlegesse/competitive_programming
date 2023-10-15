@@ -1,0 +1,18 @@
+class Solution:
+    def countGoodNumbers(self, n: int) -> int:
+        mod = 10 ** 9 + 7
+        def myPow(x: int, n: int, mod) -> int:
+            if n == 0:
+                return 1
+            elif n == 1:
+                return x
+            else:
+                p = myPow(x, n//2,mod)
+
+            if n % 2 == 0:
+                return (p*p)% mod
+                
+            return ((p*p) % mod *x) % mod
+        
+        return ((myPow(4, n//2, mod))*myPow(5,(1 + n)//2, mod)) % mod
+        
