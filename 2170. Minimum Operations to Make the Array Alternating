@@ -1,0 +1,36 @@
+class Solution:
+    def minimumOperations(self, nums: List[int]) -> int:
+        evenIdx = defaultdict(int)
+        oddIdx = defaultdict(int)
+        n = len(nums)
+        ops = n
+        if n == 1:
+            return 0
+
+        for i in range(n):
+            if i % 2:
+                oddIdx[nums[i]] += 1
+            else:
+                evenIdx[nums[i]] += 1
+
+        evenIdx = sorted(evenIdx.items(), key = lambda x:x[-1])
+        oddIdx = sorted(oddIdx.items(), key = lambda x:x[-1])
+        
+        if oddIdx[-1][0] != evenIdx[-1][0]:
+            return n// 2 - oddIdx[-1][1] + (n + 1)// 2 - evenIdx[-1][1]
+
+        if len(oddIdx) > 1:
+            ops = n// 2 - oddIdx[-2][1] + (n + 1)// 2 - evenIdx[-1][1]
+
+        if len(evenIdx) > 1:
+            ops = min(ops, n// 2 - oddIdx[-1][1] + (n + 1)// 2 - evenIdx[-2][1])
+
+        if len(evenIdx) == 1 and len(oddIdx) == 1:
+            return n//2
+            
+        return ops
+        
+
+        
+
+        
