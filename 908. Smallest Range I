@@ -1,0 +1,10 @@
+class Solution:
+    def smallestRangeI(self, nums: List[int], k: int) -> int:
+        maxx = max(nums)
+        minn = min(nums)
+        
+        if maxx - k <= minn + k:
+            return 0
+        
+        return (maxx - k) - (minn + k)
+        
