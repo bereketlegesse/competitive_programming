@@ -1,0 +1,35 @@
+class Solution:
+    def unhappyFriends(self, n: int, preferences: List[List[int]], pairs: List[List[int]]) -> int:
+        rank = {i:{} for i in range(n)}
+        unhappy = set()
+        for i in range(n):
+            for j in range(n -1):
+                rank[i][preferences[i][j]] = j
+
+        for i in range(n//2):
+            x,y = pairs[i]
+            for j in range(i + 1, n//2):
+                u,v = pairs[j]
+                
+                if rank[x][u] < rank[x][y] and rank[u][x] < rank[u][v]:
+                    unhappy.add(x)
+                    unhappy.add(u)
+
+                if rank[x][v] < rank[x][y] and rank[v][x] < rank[v][u]:
+                    unhappy.add(x)
+                    unhappy.add(v)
+
+                if rank[y][u] < rank[y][x] and rank[u][y] < rank[u][v]:
+                    unhappy.add(y)
+                    unhappy.add(u)
+
+                if rank[y][v] < rank[y][x] and rank[v][y] < rank[v][u]:
+                    unhappy.add(y)
+                    unhappy.add(v)
+
+        return len(unhappy)
+
+        
+
+
+        
