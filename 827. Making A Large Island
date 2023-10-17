@@ -1,0 +1,67 @@
+class Solution:
+    def largestIsland(self, grid: List[List[int]]) -> int:
+        seen = set()
+        visited = set()
+        n = len(grid)
+        dirr = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        id = 0
+        newGrid = deepcopy(grid)
+        maxSize = 1
+
+        def dfs(row, col):
+            if row < 0 or col < 0 or row == n or col == n:
+                return
+            
+            if grid[row][col] == 0:
+                return
+            
+            if (row, col) in visited:
+                return
+
+            visited.add((row, col))
+            seen.add((row, col))
+            for r, c in dirr:
+                dfs(row + r, col + c)
+            
+
+        for i in range(n):
+            for j in range(n):
+                if (i,j) in seen:
+                    continue
+
+                visited = set()
+                dfs(i, j)
+                size = len(set(visited))
+                maxSize = max(maxSize, size)
+
+                id += 1 if visited else 0
+                for a,b in visited:
+                    newGrid[a][b] = (size, id)
+
+        for i in range(n):
+            for j in range(n):
+                ids = set()
+                size = 1
+
+                if grid[i][j] == 0:
+                    if i > 0 and grid[i - 1][j] and newGrid[i - 1][j][1] not in ids:
+                        ids.add(newGrid[i - 1][j][1])
+                        size += newGrid[i - 1][j][0]
+                  
+                    if i < n - 1 and grid[i + 1][j]and newGrid[i + 1][j][1] not in ids:
+                        ids.add(newGrid[i + 1][j][1])
+                        size += newGrid[i + 1][j][0]
+                    
+                    if j > 0 and grid[i][j - 1] and newGrid[i][j - 1][1] not in ids:
+                        ids.add(newGrid[i][j - 1][1])
+                        size += newGrid[i][j - 1][0]
+                  
+                    if j < n - 1 and grid[i][j + 1] and newGrid[i][j + 1][1] not in ids:
+                        ids.add(newGrid[i][j + 1][1])
+                        size += newGrid[i][j + 1][0]
+
+                    maxSize = max(maxSize, size)
+
+        return maxSize
+
+       
