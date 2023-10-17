@@ -1,0 +1,44 @@
+from collections import deque
+class Solution:
+    def calculate(self, s: str) -> int:
+        stack = deque()
+        stack2 = deque()
+        i = 0
+        while i < len(s):
+            c = s[i]
+            i += 1
+            if c.isdigit():
+                while i < len(s) and s[i].isdigit():
+                    c += s[i]
+                    i += 1
+                stack.append(c)
+            elif c == '*' or c =='/' or c == '+' or c == '-':
+                stack.append(c)
+            else:
+                continue
+        while stack:
+            c = stack.popleft()
+            if c == "*":
+                a = int(stack2.pop()) * int(stack.popleft())
+                stack2.append(a)
+            elif c == '/':
+                a = int(int(stack2.pop()) / int(stack.popleft()))
+                stack2.append(a)
+            elif c.isdigit():
+                stack2.append(c)
+            elif c == "+":
+                stack2.append(c)
+            elif c == "-":
+                stack2.append(c)
+        result = 0
+        while stack2:
+            c = stack2.popleft()
+            if c == '-':
+                result -= int(stack2.popleft())
+            elif c == '+':
+                continue
+            else:
+                result += int(c)
+        return result
+        
+        
