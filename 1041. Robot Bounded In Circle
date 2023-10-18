@@ -1,0 +1,31 @@
+class Solution:
+    def isRobotBounded(self, instructions: str) -> bool:
+        n = len(instructions)
+        locations = {(0, 0, 0)}
+        cur = [0, 0]
+        dirr = 0
+
+        #N - 0, E - 1, S - 2, W - 3
+        for i in range(4*n):
+            idx = i % n
+            if instructions[idx] == "G":
+                if dirr == 0:
+                    cur[1] += 1
+                elif dirr == 1:
+                    cur[0] += 1
+                elif dirr == 2:
+                    cur[1] -= 1
+                else:
+                    cur[0] -= 1
+            elif instructions[idx] == "L":
+                dirr = (dirr - 1 + 4) % 4
+            else:
+                dirr = (dirr + 1) % 4
+
+        if dirr == 0 and cur[0] == 0 and cur[1] == 0:
+            return True
+            
+        return False
+
+
+
