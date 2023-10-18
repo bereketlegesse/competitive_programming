@@ -1,0 +1,39 @@
+class Solution:
+    def minOperations(self, nums: List[int]) -> int:
+        n = len(nums)
+        maxx = max(nums)
+        count = Counter(nums)
+        duplicates = 0
+
+        for i in range(n):
+            if count[nums[i]] > 1:
+                count[nums[i]] -= 1
+                duplicates += 1
+                nums[i] = maxx + 2*n
+            
+        nums.sort()
+        capacity = [0]
+        ops = n - 1
+        for i in range(n - 1):
+            capacity.append(capacity[-1] + nums[i + 1] - nums[i] - 1)
+      
+        for i in range(n - duplicates - 1):
+            target = nums[i] + n - 1
+            idx = bisect_right(nums, target)
+        
+            if target >= nums[-1] and capacity[-1] >= i:
+                ops =  min(ops, i)
+
+            elif target < nums[-1] and capacity[idx] >= i + n -  idx:
+                ops =  min(ops, i + n - idx)
+  
+            elif target < nums[-1]:
+                if target - nums[idx -1] > n - idx:
+                    ops = min(ops, n - idx)
+            
+        return ops 
+
+        
+        
+
+        
