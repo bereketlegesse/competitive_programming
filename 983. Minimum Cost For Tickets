@@ -1,0 +1,20 @@
+class Solution:
+    def mincostTickets(self, days: List[int], costs: List[int]) -> int:
+        n = len(days)
+        # def dp(index):
+        #     if index >= n:
+        #         return 0
+                
+        #     week = bisect_left(days, days[index] + 7)
+        #     month = bisect_left(days, days[index] + 30)
+        #     return min(costs[0] + dp(index + 1), costs[1] + dp(week), costs[2] + dp(month))
+        # return dp(0)
+
+        dp = [float("inf") for i in range(n + 1)]
+        dp[n] = 0
+        for i in range(n - 1, -1, -1):
+            week = min(n, bisect_left(days, days[i] + 7))
+            month = min(n, bisect_left(days, days[i] + 30)) 
+            dp[i] = min(costs[0] + dp[i + 1], costs[1] + dp[week], costs[2] + dp[month])
+            
+        return dp[0]
