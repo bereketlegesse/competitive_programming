@@ -1,0 +1,28 @@
+class Solution(object):
+    def checkInclusion(self, s1, s2):
+        count2 = Counter(s2[:len(s1)])
+        count1 = Counter(s1)
+        if count1 == count2:
+            return True
+
+        left = 0
+        right = len(s1)
+
+        while right < len(s2):
+            if s2[right] in count2:
+                count2[s2[right]] += 1
+            else:
+                count2[s2[right]] = 1
+        
+            count2[s2[left]] -= 1
+
+            if count2[s2[left]] == 0:
+                count2.pop(s2[left])
+
+            if count2 == count1:
+                return True
+
+            right += 1
+            left += 1
+            
+        
