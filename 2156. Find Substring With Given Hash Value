@@ -1,0 +1,16 @@
+class Solution:
+    def subStrHash(self, s: str, power: int, modulo: int, k: int, hashValue: int) -> str:
+        n = len(s)
+        hash_ = 0
+        idx = 0
+        p = (power**(k - 1))%modulo
+
+        for i in range(n - 1, -1, -1):
+            if len(s) - i > k:
+                hash_ = (hash_ - ((ord(s[i+k])- ord('a') + 1)* p)) % modulo
+
+            hash_= (hash_*power + ord(s[i])-97+1)%modulo
+            if hash_ == hashValue:
+                idx = i
+                
+        return s[idx : idx + k]
