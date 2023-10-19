@@ -1,0 +1,52 @@
+class Solution:
+    def validIPAddress(self, queryIp: str) -> str:
+        letters = {"a", 'b', 'c', 'd', 'e', 'f', "A", "B", "C", "D", "E", "F"}
+
+        def validIp4(queryIp):
+            queryIp = list(queryIp.split("."))
+            if len(queryIp) != 4:
+                return 
+            for i in range(4):
+                cur = queryIp[i]
+                if not cur:
+                    return 
+
+                for i in cur:
+                    if not i.isdigit():
+                        return
+
+                if len(cur) > 1 and cur[0] == "0":
+                    return 
+
+                if int(cur) >= 256:
+                    return
+            return True
+
+        def validIp6(queryIp):
+            queryIp = list(queryIp.split(":"))
+            if len(queryIp) != 8:
+                return 
+
+            for i in range(8):
+                cur = queryIp[i]
+                if len(cur) > 4:
+                    return
+                if not cur:
+                    return 
+                for i in cur:
+                    if not i.isdigit() and i not in letters:
+                        return
+
+            return True
+
+        if validIp4(queryIp):
+            return "IPv4"
+
+        if validIp6(queryIp):
+            return "IPv6"
+
+        return "Neither"
+
+
+
+        
