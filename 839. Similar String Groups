@@ -1,0 +1,36 @@
+class Solution:
+    def numSimilarGroups(self, strs: List[str]) -> int:
+        n = len(strs)
+        m = len(strs[0])
+        graph = defaultdict(list)
+
+        for i in range(n):
+            for j in range(i + 1, n):
+                diff = []
+                for k in range(m):
+                    if strs[i][k] != strs[j][k]:
+                        diff.append(k)
+                        if len(diff) > 2:
+                            break
+            
+                if len(diff) == 2 and strs[i][diff[0]] == strs[j][diff[1]] and strs[i][diff[1]] == strs[j][diff[0]] or not diff:
+                    graph[i].append(j)
+                    graph[j].append(i)
+
+        visited = set()
+        def dfs(node):
+            if not graph[node] or node in visited:
+                return
+
+            visited.add(node)
+            for i in graph[node]:
+                dfs(i)
+                
+        count = 0
+        for i in range(n):
+            if i in visited:
+                continue
+            dfs(i)
+            count += 1
+
+        return count
