@@ -1,0 +1,65 @@
+class TrieNode:
+    def __init__(self):
+        self.children = [None for i in range(26)]
+        self.idx = set()
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+    def Insert(self, words):
+        n = len(words)
+        cur = self.root
+
+        for i in range(n):
+            for char in words[i]:
+                idx = ord(char) - ord('a')
+                if not cur.children[idx]:
+                    cur.children[idx] = TrieNode()
+
+                cur.children[idx].idx.add(i)
+                cur = cur.children[idx]
+
+            cur = self.root
+                
+    def search(self, word):
+        cur = self.root
+        for char in word:
+            idx = ord(char) - ord('a')
+
+            if not cur.children[idx]:
+                return {}
+
+            cur = cur.children[idx]
+        return cur.idx
+
+class WordFilter:
+
+    def __init__(self, words: List[str]):
+        self.prefix = Trie()
+        self.suffix = Trie()
+
+        reversedWords = [i[::-1] for i in words]
+        self.prefix.Insert(words)
+        self.suffix.Insert(reversedWords)
+        self.store = dict()
+        
+    def f(self, pref: str, suff: str) -> int:
+        if (pref, suff) in self.store:
+            return self.store[(pref, suff)]
+
+        prefixs = self.prefix.search(pref)
+        suffixs = self.suffix.search(suff[::-1])
+    
+        if prefixs and suffixs:
+            indices = prefixs.intersection(suffixs)
+            self.store[(pref, suff)] = max(indices) if indices else -1
+            return self.store[(pref, suff)]
+
+        return -1
+        
+        
+
+
+# Your WordFilter object will be instantiated and called as such:
+# obj = WordFilter(words)
+# param_1 = obj.f(pref,suff)
