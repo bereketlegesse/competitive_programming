@@ -1,0 +1,23 @@
+class Solution:
+    def smallestSubsequence(self, s: str) -> str:
+        n = len(s)
+        lastIdx = dict()
+        stack = []
+
+        for i in range(n):
+            lastIdx[s[i]] = i
+
+        visited = set()
+        for i in range(n):
+            while stack and stack[-1] > s[i]:
+                if lastIdx[stack[-1]] > i and s[i] not in visited:
+                    visited.remove(stack[-1])
+                    stack.pop()
+                else:
+                    break
+ 
+            if s[i] not in visited:
+                visited.add(s[i])
+                stack.append(s[i])
+
+        return "".join(stack)
