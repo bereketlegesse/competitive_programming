@@ -1,0 +1,25 @@
+class ProductOfNumbers:
+
+    def __init__(self):
+        self.queue = [1]
+        self.zero = -1
+
+    def add(self, num: int) -> None:
+        if num != 0:
+            self.queue.append(self.queue[-1] * num)
+            self.zero += 1 if self.zero >= 0 else 0
+        else:
+            self.zero = 0
+
+    def getProduct(self, k: int) -> int: 
+        if self.zero < 0 or self.zero >= k:
+            return self.queue[-1] // self.queue[-1 * (k + 1)]
+        return 0 
+        
+        
+
+
+# Your ProductOfNumbers object will be instantiated and called as such:
+# obj = ProductOfNumbers()
+# obj.add(num)
+# param_2 = obj.getProduct(k)
