@@ -1,0 +1,32 @@
+class Solution:
+    def maximumScore(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        left = k
+        right = k
+        minn = nums[k]
+        maxScore = nums[k]
+
+        while left > 0 or right < n:
+            if left >= 0 and right < n:
+                
+                if nums[left] >= nums[right]:
+                    minn = min(minn, nums[left])
+                    maxScore = max(maxScore, minn * (right - left))
+                    left -= 1
+                   
+                else:
+                    minn = min(minn, nums[right])
+                    maxScore = max(maxScore, minn * (right - left))
+                    right += 1
+
+            elif left >= 0:
+                minn = min(minn, nums[left])
+                maxScore = max(maxScore, minn * (right - left))
+                left -= 1
+
+            else:
+                minn = min(minn, nums[right])
+                maxScore = max(maxScore, minn * (right - left))
+                right += 1
+
+        return maxScore
