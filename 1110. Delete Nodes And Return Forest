@@ -1,0 +1,61 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeNode]:
+        roots = []
+        head = TreeNode()
+        head.left = root
+        to_delete = set(to_delete)
+
+        def dfs(prev, node, left):
+            if not node:
+                return
+           
+            if node.val in to_delete:
+                if left:
+                    prev.left = None
+                    if node.left:
+                        if node.left.val not in to_delete:
+                            roots.append(node.left)
+
+                        dfs(node.left, node.left.left, 1)
+                        dfs(node.left, node.left.right, 0)
+
+                    if node.right:
+                        if node.right.val not in to_delete:
+                            roots.append(node.right)
+
+                        dfs(node.right, node.right.left, 1)
+                        dfs(node.right, node.right.right, 0)
+
+                else:
+                    prev.right = None
+                    if node.left:
+                        if node.left.val not in to_delete:
+                            roots.append(node.left)
+
+                        dfs(node.left, node.left.left, 1)
+                        dfs(node.left, node.left.right, 0)
+
+                    if node.right:
+                        if node.right.val not in to_delete:
+                            roots.append(node.right)
+
+                        dfs(node.right, node.right.left, 1)
+                        dfs(node.right, node.right.right, 0)
+            else:
+                if prev.val in to_delete:
+                    roots.append(node)
+                dfs(node, node.left, 1)
+                dfs(node, node.right, 0)
+
+        dfs(head, root, 1)
+        if root.val not in to_delete:
+            roots.append(root)
+
+        return roots
+            
