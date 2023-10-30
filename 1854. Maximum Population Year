@@ -1,0 +1,14 @@
+class Solution:
+    def maximumPopulation(self, logs: List[List[int]]) -> int:
+        year = [0 for i in range(2050 - 1950 + 1)]
+
+        for birth, death in logs:
+            year[birth - 1950] += 1
+            year[death - 1950] -= 1
+
+        for i in range(1, 2050 - 1950 + 1):
+            year[i] += year[i - 1]
+
+        maxx = max(year)
+        return year.index(maxx) + 1950
+        
