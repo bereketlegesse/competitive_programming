@@ -1,0 +1,20 @@
+class Solution:
+    def maximumScore(self, a: int, b: int, c: int) -> int:
+        heap = [-a, -b, -c]
+        heapify(heap)
+        count = 0
+
+        while heap:
+            a =  heappop(heap)
+            if heap:
+                b = heappop(heap)
+                count += 1
+                if b + 1 < 0:
+                    heappush(heap, b + 1)
+                if a + 1 < 0:
+                    heappush(heap, a + 1)
+
+            else:
+                break
+                
+        return count
