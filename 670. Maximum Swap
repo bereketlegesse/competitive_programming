@@ -1,0 +1,17 @@
+class Solution:
+    def maximumSwap(self, num: int) -> int:
+        num = [i for i in str(num)]
+        n = len(num)
+        sortedNum = sorted(num, reverse = True)
+        index = dict()
+
+        for i in range(n):
+            index[num[i]] = i
+
+        for i in range(n):
+            if num[i] != sortedNum[i]:
+                num[i], num[index[sortedNum[i]]] = num[index[sortedNum[i]]], num[i]
+                break
+
+        return int("".join(num))
+        
