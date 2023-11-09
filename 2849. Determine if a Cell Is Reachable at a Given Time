@@ -1,0 +1,14 @@
+class Solution:
+    def isReachableAtTime(self, sx: int, sy: int, fx: int, fy: int, t: int) -> bool:
+        x = abs(sx - fx)
+        y = abs(sy - fy)
+        minn = min(x, y) + abs(x - y)
+
+        if x == 0 or y == 0:
+            return 0 <= t - max(x, y) and (max(x, y) != 0 or t != 1)
+
+        if minn <= t:
+            return True
+            
+        return False
+        
