@@ -1,0 +1,22 @@
+class Solution:
+    def restoreArray(self, adjacentPairs: List[List[int]]) -> List[int]:
+        graph = defaultdict(list)
+        for a,b in adjacentPairs:
+            graph[a].append(b)
+            graph[b].append(a)
+
+        nums = []
+        visited = set()
+        def dfs(node):
+            if node in visited:
+                return
+            nums.append(node)
+            visited.add(node)
+            for child in graph[node]:
+                dfs(child)
+        
+        for key in graph:
+            if len(graph[key]) == 1:
+                dfs(key)
+
+        return nums
