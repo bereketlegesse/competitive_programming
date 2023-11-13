@@ -1,0 +1,19 @@
+class Solution(object):
+    def sortVowels(self, s):
+        l = []
+        v = []
+        vowels = 'AEIOUaeiou'
+
+        for i in range(len(s)):
+            if s[i] in vowels:
+                l.append(i)
+                v.append(s[i])
+  
+        v.sort()
+        s = list(s)
+        
+        while l: 
+            s[l.pop(0)] = v.pop(0)
+
+        return ''.join(s)
+        
