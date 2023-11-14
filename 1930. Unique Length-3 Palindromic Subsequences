@@ -1,0 +1,18 @@
+class Solution(object):
+    def countPalindromicSubsequence(self, s):
+        count = Counter(s)
+        result = 0
+        for i in count.keys():
+            if count[i]>=3:
+                result+=1
+        d = defaultdict(list)
+        for i,n in enumerate(s):
+            d[n].append(i)
+        for i in d.keys():
+            if len(d[i]) >= 1 and d[i][-1] - d[i][0] > 1:
+                a = set(s[d[i][0]:d[i][-1]])
+                a.remove(i)
+                result += len(a)
+        return result
+        
+        
