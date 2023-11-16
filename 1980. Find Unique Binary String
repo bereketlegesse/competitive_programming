@@ -1,0 +1,24 @@
+class Solution:
+    def findDifferentBinaryString(self, nums: List[str]) -> str:
+        n = len(nums[0])
+        m = len(nums)
+        missing = ""
+
+        for i in range(n):
+            zeros = 0
+            ones = 0
+
+            for j in range(m):
+                if zeros and ones:
+                    missing += "1"
+                    break4
+                    
+                zeros += 1 if nums[i][j] == "0" else 0
+                ones += 1 if nums[j] == "1" else 0
+
+            else:
+                if zeros:
+                    return missing + "1" * (n - len(missing))
+
+                return missing + "0" * (n - len(missing))
+
