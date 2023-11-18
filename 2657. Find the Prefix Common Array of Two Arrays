@@ -1,0 +1,18 @@
+class Solution:
+    def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
+        n = len(A)
+        result = []
+        dict1 = defaultdict(int)
+        dict2 = defaultdict(int)
+
+        for i in range(n):
+            dict1[A[i]] += 1
+            dict2[B[i]] += 1
+            count = 0
+            
+            for k in dict1.keys():
+                count += min(dict1[k], dict2[k])
+            result.append(count)
+
+        return result
+
