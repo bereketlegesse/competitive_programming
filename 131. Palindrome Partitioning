@@ -1,0 +1,23 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        container = []
+        n = len(s)
+
+        def backtrack(index, curr):
+            if index == n:
+                if curr[-1] == curr[-1][::-1]:
+                    container.append(curr.copy())
+                return
+            
+            if not curr or curr[-1] == curr[-1][::-1]:
+                curr.append(s[index])
+                backtrack(index + 1, curr)
+                curr.pop()
+
+            if curr:   
+                curr[-1] = curr[-1] + s[index]
+                backtrack(index + 1, curr)          
+                curr[-1] = curr[-1][:-1]
+                
+        backtrack(0, [])
+        return container
