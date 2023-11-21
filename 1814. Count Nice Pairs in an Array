@@ -1,0 +1,15 @@
+class Solution:
+    def countNicePairs(self, nums: List[int]) -> int:
+        n = len(nums)
+        nums = [nums[i] - int(str(nums[i])[::-1]) for i in range(n)]
+        prev = defaultdict(int)
+        prev[nums[0]] += 1
+        count = 0
+
+        for i in range(1, n):
+            if nums[i] in prev:
+                count += prev[nums[i]]
+            prev[nums[i]] += 1
+
+        return count % (10**9 + 7)
+
