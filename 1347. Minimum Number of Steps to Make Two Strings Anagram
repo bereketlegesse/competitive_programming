@@ -1,0 +1,11 @@
+class Solution:
+    def minSteps(self, s: str, t: str) -> int:
+        counter1 = Counter(s)
+        counter2 = Counter(t)
+        result = 0
+
+        for key in counter1:
+            result += max(0, counter1[key] - counter2[key])
+
+        return result
+        
