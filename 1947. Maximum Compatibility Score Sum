@@ -1,0 +1,29 @@
+class Solution:
+    def maxCompatibilitySum(self, students: List[List[int]], mentors: List[List[int]]) -> int:
+        n = len(students)
+        memo = defaultdict(int)
+        mask = 0
+
+        def dp(i, mask):
+            nonlocal n
+            if i >= n:
+                return 0
+
+            if (i, mask) in memo:
+                return memo[(i, mask)]
+
+            res = -math.inf
+            for j in range(n):
+                if (mask >> j) & 1 == 1:
+                    continue
+
+                mask = mask | (1 << j)
+                currScore = sum(students[i][k] == mentors[j][k] for k in range(len(students[i])))
+                nextScore = dp(i + 1, mask)
+                res = max(res, currScore + nextScore)
+                mask = mask ^ (1 << j)
+
+            memo[(i, mask)] = res
+            return res
+
+        return dp(0, mask)
