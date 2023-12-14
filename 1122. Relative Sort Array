@@ -1,0 +1,15 @@
+class Solution:
+    def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
+        neww = []
+        count = Counter(arr1)
+        arr = set(arr2)
+        for i in arr2:
+            neww += [i for j in range(count[i])]
+            
+        lst = []
+        for i in arr1:
+            if i not in arr:
+                lst.append(i)
+
+        neww += sorted(lst)
+        return neww
