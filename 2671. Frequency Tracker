@@ -1,0 +1,34 @@
+class FrequencyTracker:
+    def __init__(self):
+        self.num = {}
+        self.freq = defaultdict(list)
+        
+
+    def add(self, number: int) -> None:
+        curr = self.num.get(number,0)
+        self.num[number] = 1 + curr
+        if number in self.freq[curr]:
+            self.freq[curr].remove(number)
+        self.freq[1+curr].append(number)
+        
+
+    def deleteOne(self, number: int) -> None:
+        if number in self.num and self.num[number]>0:
+            curr = self.num[number]
+            self.num[number]-=1
+            self.freq[curr].remove(number)
+            self.freq[curr-1].append(number)
+            
+
+    def hasFrequency(self, frequency: int) -> bool:
+        if frequency in self.freq and len(self.freq[frequency]) > 0:
+            return True
+        return False
+        
+
+
+# Your FrequencyTracker object will be instantiated and called as such:
+# obj = FrequencyTracker()
+# obj.add(number)
+# obj.deleteOne(number)
+# param_3 = obj.hasFrequency(frequency)
