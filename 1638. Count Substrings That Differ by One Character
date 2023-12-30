@@ -1,0 +1,27 @@
+class Solution:
+    def countSubstrings(self, s: str, t: str) -> int:
+        n = len(s)
+        m = len(t)
+
+        matrix = [[0 for i in range(m)] for j in range(n)]
+        count = 0
+
+        for i in range(n):
+            for j in range(m):
+                if s[i] != t[j]:
+                    matrix[i][j] = 1
+                    
+                row = i
+                col = j
+                Sum = 0
+                while row >= 0 and col >= 0 and Sum <= 1:
+                    Sum += matrix[row][col]
+                    if Sum == 1:
+                        count += 1
+                    row -= 1
+                    col -= 1
+
+        
+        return count
+
+                    
