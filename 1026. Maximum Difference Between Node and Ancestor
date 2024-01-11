@@ -1,0 +1,28 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxAncestorDiff(self, root: Optional[TreeNode]) -> int:
+        diff =0
+        
+        def traverse(node):
+            nonlocal diff
+            if not node.left and not node.right:
+                return node.val, node.val
+            result = [node.val, node.val]
+            if node.left:
+                left = traverse(node.left)
+                diff = max(diff, node.val - left[0], left[1] - node.val)
+                result[0] = min(result[0], left[0])
+                result[1] = max(result[1], left[1])
+            if node.right:
+                right = traverse(node.right)
+                diff = max(diff, node.val - right[0], right[1] - node.val)
+                result[0] = min(result[0], right[0])
+                result[1] = max(result[1], right[1])
+            return result 
+        traverse(root)
+        return diff
