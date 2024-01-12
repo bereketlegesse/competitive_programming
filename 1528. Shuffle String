@@ -1,0 +1,6 @@
+class Solution:
+    def restoreString(self, s: str, indices: List[int]) -> str:
+        s = [(s[i], indices[i]) for i in range(len(s))]
+        s.sort(key = lambda x : x[-1])
+        return "".join([i[0] for i in s])
+        
