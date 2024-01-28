@@ -1,0 +1,55 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
+        deepest = []
+        queue = deque()
+        queue.append(root)
+
+        while queue:
+            curLen = len(queue)
+            for i in range(curLen):
+                curNode = queue.popleft()
+
+                if curNode.left:
+                    queue.append(curNode.left)
+                if curNode.right:
+                    queue.append(curNode.right)
+                    
+            if queue:
+                deepest = queue.copy()
+
+        answer = root
+        def traverse(node):
+            nonlocal answer
+            if not node.left and not node.right:
+                if len(deepest) == 1 and node in deepest:
+                    answer = node
+                    return 0
+
+                return node in deepest
+
+            cur = 0
+
+            if node.left:
+                cur += traverse(node.left)
+
+            if node.right:
+                cur += traverse(node.right)
+
+            if cur == len(deepest):
+                answer = node
+                cur -= 10
+           
+            return cur
+
+        traverse(root)
+        return answer
+
+
+        
+        
