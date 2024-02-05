@@ -1,0 +1,15 @@
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        lastidx = dict()
+        visited = set()
+        
+        for i in range(len(s)):
+            lastidx[s[i]] = i
+        
+        for i in range(len(s)):
+            if lastidx[s[i]] == i and s[i] not in visited:
+                return i 
+            visited.add(s[i])
+            
+        return -1
+        
