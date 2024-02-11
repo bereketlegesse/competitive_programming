@@ -1,0 +1,17 @@
+class Solution:
+    def numRollsToTarget(self, N: int, k: int, T: int) -> int:
+        @cache
+        def dp(target, n, cur):
+            if target == 0 and n == 0:
+                return 1
+
+            if target < 0 or n == 0 or cur > k :
+                return 0
+            ans = 0
+            for i in range(cur, k + 1):
+                ans += dp(target - i, n - 1, i)
+
+            return ans
+
+        return N * dp(T, N, 1) % (10 **9 + 7)
+            
