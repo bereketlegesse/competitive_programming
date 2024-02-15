@@ -1,0 +1,17 @@
+class Solution:
+    def maximumCostSubstring(self, s: str, chars: str, vals: List[int]) -> int:
+        curr = 0
+        answer = 0
+
+        for i in s:
+            val = 0
+            if i in chars:
+                val = vals[chars.index(i)]
+            else:
+                val = (ord(i) - ord('a')) + 1
+
+            curr = curr + val
+            answer = max(answer, curr)
+            curr = max(curr, 0)
+        
+        return answer
