@@ -1,0 +1,11 @@
+class Solution:
+    def countWords(self, words1: List[str], words2: List[str]) -> int:
+        count1 = Counter(words1)
+        count2 = Counter(words2)
+        c = 0
+
+        for key in count1.keys():
+            if count1[key] == 1 and count2[key] == 1:
+                c += 1
+
+        return c      
