@@ -1,0 +1,15 @@
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        index = defaultdict(list)
+        count = len(s)
+
+        for i in range(len(s)):
+            index[s[i]].append(i)
+       
+        for key in index.keys():
+            for i in range(len(index[key])):
+                for j in range(i + 1, len(index[key])):
+                    count += 1 if s[index[key][i]: index[key][j] + 1] == s[index[key][i]: index[key][j] + 1][::-1] else 0
+
+        return count 
+        
