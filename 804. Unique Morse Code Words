@@ -1,0 +1,13 @@
+class Solution:
+    def uniqueMorseRepresentations(self, words: List[str]) -> int:
+        mapp = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+        transformation = set()
+
+        for word in words:
+            cur = []
+            for char in word:
+                cur.append(mapp[ord(char) -  ord('a')])
+            transformation.add("".join(cur))
+        
+        return len(transformation)
+            
