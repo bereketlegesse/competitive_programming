@@ -1,0 +1,18 @@
+class Solution:
+    def maxScoreIndices(self, nums: List[int]) -> List[int]:
+        max_score = 0
+        score_idx = dict()
+
+        nums_left = 0
+        nums_right = sum(nums)
+        score_idx[0] = nums_left + nums_right
+
+        for i in range(len(nums)):
+            nums_left += 1 - nums[i]
+            nums_right -= nums[i]
+
+            score_idx[i+1] = nums_left + nums_right
+
+        maxScore = max(score_idx.values())  
+        indices = list(filter(lambda x: score_idx[x] == maxScore, score_idx.keys()))
+        return indices
