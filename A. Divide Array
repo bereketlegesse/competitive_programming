@@ -1,0 +1,20 @@
+n = int(input())
+lst = list(map(int, input().split()))
+ 
+set1 = []
+set2 = []
+set3 = []
+lst.sort()
+ 
+set1 = [lst[0]]
+ 
+if lst[-1] > 0:
+    set2 = [lst[-1]]
+    set3 = lst[1:-1]
+else:
+    set2 = [lst[1], lst[2]]
+    set3 = lst[3:]
+    
+print(len(set1), *set1)
+print(len(set2), *set2)
+print(len(set3), *set3)
