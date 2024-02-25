@@ -1,0 +1,7 @@
+class Solution:
+    def optimalDivision(self, nums: List[int]) -> str:
+        nums = [str(i) for i in nums]
+        if len(nums) < 3:
+            return "/".join(nums)
+        result = "/".join(nums)
+        return result[:len(nums[0]) + 1] + "(" + result[len(nums[0]) + 1:] + ")"
