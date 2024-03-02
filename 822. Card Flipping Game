@@ -1,0 +1,15 @@
+class Solution:
+    def flipgame(self, fronts: List[int], backs: List[int]) -> int:
+        n = len(fronts)
+        visited = set()
+        repeated = set()
+
+        for i in range(n):
+            visited.add(fronts[i])
+            visited.add(backs[i])
+
+            if fronts[i] == backs[i]:
+                repeated.add(fronts[i])
+
+        return min(visited - repeated) if visited - repeated else 0
+        
