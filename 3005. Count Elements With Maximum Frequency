@@ -1,0 +1,14 @@
+class Solution:
+    def maxFrequencyElements(self, nums: List[int]) -> int:
+        count = Counter(nums)
+        maxFreq = max(count.values())
+        sum_ = 0
+        
+        for i in count.keys():
+            if count[i] == maxFreq:
+                sum_ += maxFreq
+        
+        return sum_
+
+
+        
