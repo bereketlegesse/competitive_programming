@@ -1,0 +1,39 @@
+class Solution:
+    def findIndices(self, nums: List[int], indexDifference: int, valueDifference: int) -> List[int]:
+            n = len(nums)
+
+            minMaxback = []
+            min_temp = nums[n-1]
+            max_temp = nums[n-1]
+
+            min_index = n-1
+            max_index = n-1
+
+            for i in range(n-1, -1, -1):
+                if min_temp > nums[i]:
+                    min_temp = nums[i]
+                    min_index = i
+
+                if max_temp < nums[i]:
+                    max_temp = nums[i]
+                    max_index = i
+
+                minMaxback.append((min_index, max_index))
+
+            minMaxback.reverse()
+            
+            max_temp = nums[0]
+            min_temp = nums[0]
+            
+            for i in range(n -  indexDifference):
+                max_temp = max(nums[i], max_temp)
+                min_temp = min(nums[i], min_temp)
+                curr = i + indexDifference
+
+                if (max_temp - nums[minMaxback[curr][0]]) >= valueDifference:
+                        return [i, minMaxback[curr][0]]
+
+                if abs(min_temp - nums[minMaxback[curr][1]]) >= valueDifference:
+                        return [i, minMaxback[curr][1]]
+
+            return [-1, -1]
